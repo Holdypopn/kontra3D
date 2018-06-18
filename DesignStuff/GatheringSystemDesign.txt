@@ -1,0 +1,25 @@
+Gathering System
+================
+
+Inputs:
+-------
+PlayerStats
+	- Health
+	- Fortitude
+Equipment
+	- Weapon
+	- Misc (Map, Flashlight, ...)
+
+
+Processing:
+-----------
+- Pool of items with own rarity/probability
+- "Baselevel" were you just get the flat probabilities of the items and just "roll the dice"
+- Stats and Equipment improve the probability
+
+- A "Focus" value - What am I looking for?
+
+
+Outputs:
+--------
+Items!
