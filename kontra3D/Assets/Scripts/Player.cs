@@ -34,7 +34,6 @@ public class Player : MonoBehaviour {
 
     public void Sleep()
     {
-
     }
 
     public void Eat()
