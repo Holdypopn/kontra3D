@@ -18,6 +18,7 @@ Processing:
 - Stats and Equipment improve the probability
 
 - A "Focus" value - What am I looking for?
+- You always look for one "TimeUnit" and get a result -> now you can decide to go on with the search or come back
 
 
 Outputs:
