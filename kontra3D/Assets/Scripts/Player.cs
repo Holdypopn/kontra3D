@@ -34,26 +34,26 @@ public class Player : MonoBehaviour {
 
     public void Sleep()
     {
-
+        Debug.Log(Fortitude);
     }
 
     public void Eat()
     {
-
+        Debug.Log(Hunger);
     }
 
     public void Drink()
     {
-
+        Debug.Log(Thirst);
     }
 
     public void Heal()
     {
-
+        Debug.Log(Health);
     }
 
     public void TakeDamage()
     {
-
+        Debug.Log(Health);
     }
 }
