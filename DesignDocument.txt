@@ -3,34 +3,44 @@ Design Document
 
 Game Identity / Mantra:
 -----------------------
+Post-apocalyptic resource-managing survival game based on day-to-day decision making.
 
 Design Pillars:
 ---------------
-
-Genre / Story / Mechanics Summary:
-----------------------------------
+- Daily resource shortage / struggle
+- Hope for next positive moment
+- Trying to reach a "safe" place
 
 Features:
 ---------
+- Day-to-day survival (Player statistics)
+- Resource management (Item handling)
+- Resource gathering (Input-Output system)
 
 Interface:
 ----------
+- Mostly menus
+- Mouse or touch
+- Basic keyboard shortcuts (like "i" for inventory etc.)
 
 Art Style:
 ----------
+- Dark
+- Post-apocalyptic
+- Low-poly
 
 Music / Sound:
 --------------
+- Dark / Sad / Hopeless / Endless
 
 Development Roadmap / Launch Criteria:
 --------------------------------------
-Platform:
-Audience:
+Platform: Web / Google Play / Steam / iOS
+Audience: 16-40 / Both genders / Casual gamer
 
-Milestone 1:
-Milestone 2:
-Milestone 3:
-Milestone 4:
-Milestone 5:
-Milestone 6:
-Milestone 7:
+Milestone 1: Inventory System complete
+Milestone 2: Player statitics/properties complete
+Milestone 3: Resource Gathering System complete
+Milestone 4: Polished UI complete
+Milestone 5: General polishing complete
+Milestone 6: Build and Publish
