@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 public class Player : MonoBehaviour {
@@ -56,4 +57,15 @@ public class Player : MonoBehaviour {
     {
         Debug.Log(Health);
     }
+
+    public Inventory inventory;
+
+    //TODO: Add item, only for testing suppose
+    public void AddItem()
+    {
+        Object prefab = AssetDatabase.LoadAssetAtPath("Assets/Inventory/Items/Strawberry.prefab", typeof(GameObject));
+        GameObject clone = Instantiate(prefab, Vector3.zero, Quaternion.identity) as GameObject;
+        inventory.AddItem(clone.GetComponent<IInventoryItem>());
+    }
+
 }
