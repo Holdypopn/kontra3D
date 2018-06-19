@@ -20,6 +20,9 @@ public class Player : MonoBehaviour {
     }
     #endregion
 
+    public delegate void OnPlayerStatChanged();
+    public OnPlayerStatChanged onPlayerStatChangedCallback;
+
     public int Health;
     public int Hunger;
     public int Thirst;
@@ -36,6 +39,9 @@ public class Player : MonoBehaviour {
     public void Sleep()
     {
         Debug.Log(Fortitude);
+
+        if (onPlayerStatChangedCallback != null)
+            onPlayerStatChangedCallback.Invoke();
     }
 
     public void Eat()
