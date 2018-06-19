@@ -51,58 +51,14 @@ public class Inventory : MonoBehaviour
 
     public void AddItem(ItemType type)
     {
-        //var inventoryItemComponent = new GameObject().AddComponent<InventoryItem>();
-
         InventoryItem_Base item = null;
-        //Get the item from all parsed items
 
         item = GetItem(type);
-
-        //item = availableItems.Drink.First(it => it.Name == type.ToString());
-
-        //for (int i=0; i< 4; i++)    //TODO alle listen durchitearieren und nicht mit for und fixen index
-        //{
-        //    switch(i)
-        //    {
-        //        case 0:
-        //            item = availableItems.Food.First(it => it.Name == type.ToString());
-        //            break;
-        //        //case 1:
-        //        //    item = availableItems.Health.First(it => it.Name == type.ToString());
-
-        //        //    break;
-        //        //case 2:
-        //        //    item = availableItems.Weapon.First(it => it.Name == type.ToString());
-
-        //        //    break;
-        //        //case 3:
-        //        //    item = availableItems.Drink.First(it => it.Name == type.ToString());
-        //        //    break;
-        //    }
-
-        //    if(item != null)
-        //    {
-        //        break;
-        //    }
-
-        //}
 
         if (item == null)
         {
             Debug.Log("The item " + type.ToString() + "does not exist in available items.");
         }
-
-        //Debug.Log("Found Item: " + parsedItem.Description);
-
-        //if (parsedItem == null)
-        //{
-        //    Debug.Log("The item " + type.ToString() + "does not exist in available items.");
-        //}
-
-        //inventoryItemComponent.Name = parsedItem.Name;
-        //inventoryItemComponent.Description = parsedItem.Description;
-        //inventoryItemComponent.Image = Resources.Load<Sprite>(Application.dataPath + "//Inventory/Items//" + parsedItem.Name + ".png");
-        //inventoryItemComponent.StackCount = parsedItem.StackCount;
 
         InventorySlot freeSlot = FindStackableSlot(item);
 

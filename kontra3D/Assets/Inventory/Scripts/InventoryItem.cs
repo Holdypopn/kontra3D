@@ -1,21 +1,7 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEditor;
+using System.Reflection;
+using UnityEditor.Playables;
 using UnityEngine;
-
-//public interface IInventoryItem
-//{
-//    string Description { get; }
-
-//    string Name { get; }
-
-//    Sprite Image { get; }
-
-//    InventorySlot Slot { get; set; }
-
-//    int StackCount { get; }
-//}
 
 public class InventoryEventsArgs : EventArgs
 {
@@ -43,18 +29,9 @@ public class InventoryItem_Base
     public string Description;
     public int StackCount;
 
-    public Sprite Image //Maybe not working during parse
-    {
-        get
-        {
-            Debug.Log("Uff: " + Name + "Icon");
-            return Resources.Load<Sprite>(Name + "Icon");
-        }
-    }
-
     [NonSerialized]
-    private InventorySlot slot; //Maybe parsing not working
-    public InventorySlot Slot //Maybe parsing not working
+    private InventorySlot slot;
+    public InventorySlot Slot 
     {
         get
         {
@@ -65,6 +42,33 @@ public class InventoryItem_Base
             slot = value;
         }
     }
+
+    //TODO if statements ??
+    public virtual string GetHoverMenue()
+    {
+        var infos = "Properties of Item:\n";
+
+        if(this is InventoryItem_Drink)
+        {
+            infos += "Drink\nUse this item if you are thirsty\nDrinkpoints: " + ((InventoryItem_Drink)this).DrinkPoints;
+        }
+        else if (this is InventoryItem_Food)
+        {
+            infos += "Food\nUse this item if you are hungry\nFoodpoints: " + ((InventoryItem_Food)this).FoodPoints;
+        }
+        else if (this is InventoryItem_Health)
+        {
+            infos += "Health\nUse this item to regenerate health\nHealthpoints: " + ((InventoryItem_Health)this).HealthPoints;
+        }
+        else if (this is InventoryItem_Weapon)
+        {
+            infos += "Weapon\nUse this item to damage enemies\nWeaponpoints: " + ((InventoryItem_Weapon)this).WeaponPoints;
+        }
+
+        return infos;
+    }
+    private void GetDescription(string type, string description, string points)
+    { }
 }
 
 [Serializable]
@@ -90,69 +94,3 @@ public class InventoryItem_Weapon : InventoryItem_Base
 {
     public string WeaponPoints;
 }
-
-//public class InventoryItem_Base : IInventoryItem
-//{
-//    public InventoryItem_Base(string name, string description, int stackCount)
-//    {
-//        this._name = name;
-//        this.description = description;
-//        this.image = Resources.Load<Sprite>(name + "Icon");
-//        this.stackCount = stackCount;                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  
-//    }
-
-//    private string _name;
-//    public string Name
-//    {
-//        get
-//        {
-//            return _name;
-//        }
-//    }
-
-//    private Sprite image;
-
-//    public Sprite Image
-//    {
-//        get
-//        {
-//            return image;
-//        }
-//    }
-
-//    private string description;
-//    public string Description
-//    {
-//        get
-//        {
-//            return description;
-//        }
-//    }
-
-//    private InventorySlot slot;
-//    public InventorySlot Slot
-//    {
-//        get
-//        {
-//            return slot;
-//        }
-//        set
-//        {
-//            slot = value;
-//        }
-//    }
-
-//    private int stackCount;
-//    public int StackCount
-//    {
-//        get
-//        {
-//            return stackCount;
-//        }
-//    }
-
-//    public void OnPickup()
-//    {
-//        Debug.Log("Item pick up");
-//    }
-//}

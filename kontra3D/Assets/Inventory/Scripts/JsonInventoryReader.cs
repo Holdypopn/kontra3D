@@ -18,8 +18,6 @@ public class JsonInventoryReader : MonoBehaviour
             parsedData = JsonUtility.FromJson<InventoryItems>(json);
         }
 
-        Debug.Log(parsedData.Drink[0].Image);
-
         return parsedData;
     }
 }
