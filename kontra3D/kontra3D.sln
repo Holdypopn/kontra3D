@@ -1,14 +1,18 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
-
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "kontra3D", "Assembly-CSharp.csproj", "{6A80C746-5758-6CB6-4CA8-F762A00CFDDB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-
+		{6A80C746-5758-6CB6-4CA8-F762A00CFDDB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6A80C746-5758-6CB6-4CA8-F762A00CFDDB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6A80C746-5758-6CB6-4CA8-F762A00CFDDB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6A80C746-5758-6CB6-4CA8-F762A00CFDDB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -2,14 +2,14 @@
 	"Food": [{
 		"Name":"Steak",
 		"Description":"Regenerates food points.",
-		"StackCount":"10",
+		"StackCount":"2",
 		"Rareness":"25",
 		"FoodPoints":"20"
 	},
 	{
 		"Name":"Strawberry",
 		"Description":"Regenerates food points.",
-		"StackCount":"20",
+		"StackCount":"5",
 		"Rareness":"40",
 		"FoodPoints":"5"
 	}],
@@ -23,14 +23,14 @@
 	"Weapon": [{
 		"Name":"Knife",
 		"Description":"You can use this item to attack enemies.",
-		"StackCount":"10",
+		"StackCount":"1",
 		"Rareness":"25",
 		"WeaponPoints" : "15"
 	}],
 	"Health": [{
 		"Name":"Atibiotic",
 		"Description":"This item regenarates your health.",
-		"StackCount":"3",
+		"StackCount":"2",
 		"Rareness":"10",
 		"HealthPoints":"50"
 	}]
