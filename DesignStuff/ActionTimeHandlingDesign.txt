@@ -1,0 +1,15 @@
+ActionTimeHandling Design
+=========================
+
+Possible Actions:
+-----------------
+- Eat
+- Drink
+- Heal
+- Sleep
+- Scavenge
+
+Possible Time Units:
+--------------------
+- Hours
+- Action Points (AP)
