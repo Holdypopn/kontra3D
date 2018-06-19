@@ -6,21 +6,20 @@ Inputs:
 PlayerStats
 	- Health
 	- Fortitude
-Equipment
-	- Weapon
-	- Misc (Map, Flashlight, ...)
-
+	- Thirst
+	- Hunger
 
 Processing:
 -----------
 - Pool of items with own rarity/probability
 - "Baselevel" were you just get the flat probabilities of the items and just "roll the dice"
-- Stats and Equipment improve the probability
+- Stats (and Equipment) improve the probability
 
-- A "Focus" value - What am I looking for?
-- You always look for one "TimeUnit" and get a result -> now you can decide to go on with the search or come back
+- A "Focus" value - What kind of item am I looking for?
+- You always search for one "TimeUnit" and get a result -> now you can decide to extend the search or come back
 
 
 Outputs:
 --------
-Items!
+- Items
+- Altered PlayerStats
