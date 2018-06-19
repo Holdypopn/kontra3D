@@ -61,11 +61,24 @@ public class Player : MonoBehaviour {
     public Inventory inventory;
 
     //TODO: Add item, only for testing suppose
-    public void AddItem()
+    public void AddItemApplejuice()
     {
-        Object prefab = AssetDatabase.LoadAssetAtPath("Assets/Inventory/Items/Strawberry.prefab", typeof(GameObject));
-        GameObject clone = Instantiate(prefab, Vector3.zero, Quaternion.identity) as GameObject;
-        inventory.AddItem(clone.GetComponent<IInventoryItem>());
+        inventory.AddItem(ItemType.Applejuice);
     }
-
+    public void AddItemKnife()
+    {
+        inventory.AddItem(ItemType.Knife);
+    }
+    public void AddItemStrawberry()
+    {
+        inventory.AddItem(ItemType.Strawberry);
+    }
+    public void AddSteak()
+    {
+        inventory.AddItem(ItemType.Steak);
+    }
+    public void AddAtibiotic()
+    {
+        inventory.AddItem(ItemType.Atibiotic);
+    }
 }

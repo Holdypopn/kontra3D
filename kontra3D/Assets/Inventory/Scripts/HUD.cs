@@ -15,7 +15,7 @@ public class HUD : MonoBehaviour
 
     private void InventoryScript_ItemAdded(object sender, InventoryEventsArgs e)
     {
-        Transform inventoryPanel = transform.Find("Inventory").Find("InventoryPanel");
+        Transform inventoryPanel = transform.Find("Inventory").Find("InventoryPanel"); //TODO naming abhängig
 
         int index = -1;
         foreach (Transform slot in inventoryPanel)
@@ -31,7 +31,8 @@ public class HUD : MonoBehaviour
             if (index == e.Item.Slot.Id)
             {
                 image.enabled = true;
-                image.sprite = e.Item.Image;
+
+                image.sprite = Resources.Load<Sprite>(e.Item.Name + "Icon"); ;
 
                 int itemCount = e.Item.Slot.Count;
                 if (itemCount > 1)

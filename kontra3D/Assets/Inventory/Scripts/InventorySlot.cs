@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class InventorySlot
 {
-    private Stack<IInventoryItem> mItemStack = new Stack<IInventoryItem>();
+    private Stack<InventoryItem_Base> mItemStack = new Stack<InventoryItem_Base>();
 
     private int mId = 0;
 
@@ -19,13 +19,13 @@ public class InventorySlot
         get { return mId; }
     }
 
-    public void AddItem(IInventoryItem item)
+    public void AddItem(InventoryItem_Base item)
     {
         item.Slot = this;
         mItemStack.Push(item);
     }
 
-    public IInventoryItem FirstItem
+    public InventoryItem_Base FirstItem
     {
         get
         {
@@ -36,12 +36,12 @@ public class InventorySlot
         }
     }
 
-    public bool IsStackable(IInventoryItem item)
+    public bool IsStackable(InventoryItem_Base item)
     {
         if (IsEmpty || item.StackCount == mItemStack.Count)
             return false;
 
-        IInventoryItem first = mItemStack.Peek();
+        InventoryItem_Base first = mItemStack.Peek();
 
         if (first.Name == item.Name)
             return true;
@@ -59,12 +59,12 @@ public class InventorySlot
         get { return mItemStack.Count; }
     }
 
-    public bool Remove(IInventoryItem item)
+    public bool Remove(InventoryItem_Base item)
     {
         if (IsEmpty)
             return false;
 
-        IInventoryItem first = mItemStack.Peek();
+        InventoryItem_Base first = mItemStack.Peek();
         if (first.Name == item.Name)
         {
             mItemStack.Pop();

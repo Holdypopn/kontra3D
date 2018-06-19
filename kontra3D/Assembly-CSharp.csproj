@@ -51,6 +51,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\Inventory\Scripts\HUD.cs" />
+     <Compile Include="Assets\Inventory\Scripts\Inventory.cs" />
+     <Compile Include="Assets\Inventory\Scripts\InventoryItem.cs" />
+     <Compile Include="Assets\Inventory\Scripts\InventorySlot.cs" />
+     <Compile Include="Assets\Inventory\Scripts\JsonInventoryReader.cs" />
      <Compile Include="Assets\Scripts\Player.cs" />
  <Reference Include="UnityEditor.StandardEvents">
  <HintPath>D:/Git/kontra3D/kontra3D/Library/ScriptAssemblies/UnityEditor.StandardEvents.dll</HintPath>

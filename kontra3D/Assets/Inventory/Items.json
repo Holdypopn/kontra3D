@@ -1,0 +1,37 @@
+{
+	"Food": [{
+		"Name":"Steak",
+		"Description":"Regenerates food points.",
+		"StackCount":"10",
+		"Rareness":"25",
+		"FoodPoints":"20"
+	},
+	{
+		"Name":"Strawberry",
+		"Description":"Regenerates food points.",
+		"StackCount":"20",
+		"Rareness":"40",
+		"FoodPoints":"5"
+	}],
+	"Drink": [{
+		"Name":"Applejuice",
+		"Description":"Regenerates drink points.",
+		"StackCount":"2",
+		"Rareness":"25",
+		"DrinkPoints":"25"
+	}],
+	"Weapon": [{
+		"Name":"Knife",
+		"Description":"You can use this item to attack enemies.",
+		"StackCount":"10",
+		"Rareness":"25",
+		"Strength" : "15"
+	}],
+	"Health": [{
+		"Name":"Atibiotic",
+		"Description":"This item regenarates your health.",
+		"StackCount":"3",
+		"Rareness":"10",
+		"HealthPoints":"50"
+	}]
+}
