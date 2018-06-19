@@ -8,6 +8,10 @@ PlayerStats
 	- Fortitude
 	- Thirst
 	- Hunger
+Focus
+	- Food
+	- Drink
+	- Misc
 
 Processing:
 -----------
