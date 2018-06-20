@@ -48,7 +48,7 @@ public class InventoryItem_Base
     
     public string GetHoverMenue()
     {
-        string hoverInfo = "[" + this.GetType().Name + "] " + this.Name + "\n"; // f. e. [Food] Steak
+        string hoverInfo = "[" + this.GetType().Name.Split('_').Last() + "] " + this.Name + "\n"; // f. e. [Food] Steak
 
         //Get all properties for hover menue
         var properties = this.GetType().GetFields().Where(prop => prop.IsDefined(typeof(HoverMenue), false));
