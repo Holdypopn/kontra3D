@@ -38,7 +38,9 @@ public class Player : MonoBehaviour {
 
     public void Sleep()
     {
-        Debug.Log(Fortitude);
+        Fortitude += 10;
+        if (Fortitude > 100)
+            Fortitude = 100;
 
         if (onPlayerStatChangedCallback != null)
             onPlayerStatChangedCallback.Invoke();
@@ -46,27 +48,77 @@ public class Player : MonoBehaviour {
 
     public void Eat()
     {
-        Debug.Log(Hunger);
+        Hunger += 10;
+        if (Hunger > 100)
+            Hunger = 100;
+
+        if (onPlayerStatChangedCallback != null)
+            onPlayerStatChangedCallback.Invoke();
     }
 
     public void Drink()
     {
-        Debug.Log(Thirst);
+        Thirst += 10;
+        if (Thirst > 100)
+            Thirst = 100;
+
+        if (onPlayerStatChangedCallback != null)
+            onPlayerStatChangedCallback.Invoke();
     }
 
     public void Heal()
     {
-        Debug.Log(Health);
+        Health += 10;
+        if (Health > 100)
+            Health = 100;
+
+        if (onPlayerStatChangedCallback != null)
+            onPlayerStatChangedCallback.Invoke();
     }
 
     public void TakeDamage()
     {
-        Debug.Log(Health);
+        Health -= 10;
+        if (Health < 0)
+            Health = 0;
+
+        if (onPlayerStatChangedCallback != null)
+            onPlayerStatChangedCallback.Invoke();
+    }
+
+    public void GetThristy()
+    {
+        Thirst -= 10;
+        if (Thirst < 0)
+            Thirst = 0;
+
+        if (onPlayerStatChangedCallback != null)
+            onPlayerStatChangedCallback.Invoke();
+    }
+
+    public void GetHungry()
+    {
+        Hunger -= 10;
+        if (Hunger < 0)
+            Hunger = 0;
+
+        if (onPlayerStatChangedCallback != null)
+            onPlayerStatChangedCallback.Invoke();
+    }
+
+    public void GetWeak()
+    {
+        Fortitude -= 10;
+        if (Fortitude < 0)
+            Fortitude = 0;
+
+        if (onPlayerStatChangedCallback != null)
+            onPlayerStatChangedCallback.Invoke();
     }
 
     public Inventory inventory;
 
-    //TODO: Add item, only for testing suppose
+    #region TODO: Add item, only for testing suppose
     public void AddItemApplejuice()
     {
         inventory.AddItem(ItemType.Applejuice);
@@ -87,4 +139,5 @@ public class Player : MonoBehaviour {
     {
         inventory.AddItem(ItemType.Atibiotic);
     }
+    #endregion
 }
