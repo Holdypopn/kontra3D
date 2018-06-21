@@ -33,6 +33,9 @@ public class InventoryItem_Base
     [HoverMenue]
     public int StackCount;
 
+    [HoverMenue]
+    public int Rarity;
+
     [NonSerialized]
     private InventorySlot slot;
     public InventorySlot Slot 
@@ -46,7 +49,7 @@ public class InventoryItem_Base
             slot = value;
         }
     }
-    
+
     public string GetHoverMenue()
     {
         string hoverInfo = "[" + this.GetType().Name.Split('_').Last() + "] " + this.Name + "\n"; // f. e. [Food] Steak

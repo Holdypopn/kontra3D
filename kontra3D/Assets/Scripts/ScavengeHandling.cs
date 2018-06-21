@@ -1,73 +1,65 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
-public class ScavengeHandling : MonoBehaviour {
+public class ScavengeHandling : MonoBehaviour
+{
 
-    	Player player;
-	Inventory inventory;
-	List<InventoryItem_Base> itemList = inventoryInstance.availableItems;
-	
-	enum FocusType
-	{
-		Food,
-		Drink,
-		Misc,
-		Health
-	};
+    Player player;
+    Inventory inventory;
+    //List<InventoryItem_Base> itemList = Inventory.inventoryInstance.AvailableItems;
 
-	// Use this for initialization
-	void Start ()
-	{
-        	player = Player.playerInstance;
-		inventory = Inventory.inventoryInstance;
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
-	
-	void getRandomItem()
-	{
-		int totalRarity = itemList.Sum(x => x.Rarity);
-		Random r = new Random();
-		var randomNumber = r.NextDouble() * totalRarity;
+    enum FocusType
+    {
+        Food,
+        Drink,
+        Misc,
+        Health,
+        Weapon,
+        None
+    };
 
-		double totalSoFar = 0;
-		foreach (var item in itemList)
-		{
-			totalSoFar += item.Rarity;
-			if (totalSoFar > randomNumber)
-			{
-			    return item;
-			}
-		}
-	}
-	
-	void getRandomItem(FocusType focus)
-	{
-		List<ICloneable> newList = new List<ICloneable>(itemList.Count);
+    // Use this for initialization
+    void Start()
+    {
+        player = Player.playerInstance;
+        inventory = Inventory.inventoryInstance;
+    }
 
-		itemList.ForEach((item) =>
-		    {
-			newList.Add((ICloneable)item.Clone());
-		    });
-		
-		newList.Where(i => i.GetType().Name.contains(focus.ToString())).ToList().ForEach(x => x.Rarity + 5)
-		
-		int totalRarity = newList.Sum(x => x.Rarity);
-		Random r = new Random();
-		var randomNumber = r.NextDouble() * totalRarity;
+    // Update is called once per frame
+    void Update()
+    {
 
-		double totalSoFar = 0;
-		foreach (var item in newList)
-		{
-			totalSoFar += item.Rarity;
-			if (totalSoFar > randomNumber)
-			{
-			    return item;
-			}
-		}
-	}
+    }
+
+    /// <summary>
+    /// Returns a random Item
+    /// </summary>
+    /// <param name="focus">You can Focus on a Item to have a higher chance to get this</param>
+    /// <returns></returns>
+    InventoryItem_Base getRandomItem(FocusType focus = FocusType.None)
+    {
+        List<InventoryItem_Base> newList = new List<InventoryItem_Base>(Inventory.inventoryInstance.AvailableItems);
+
+        newList = newList.Where(i => i.GetType().Name.Contains(focus.ToString())).ToList();
+        newList.ForEach(x => x.Rarity += 5);
+
+        int totalRarity = newList.Sum(x => x.Rarity);
+        System.Random r = new System.Random();
+        var randomNumber = r.NextDouble() * totalRarity;
+
+        double totalSoFar = 0;
+        foreach (var item in newList)
+        {
+            totalSoFar += item.Rarity;
+            if (totalSoFar > randomNumber)
+            {
+                return item;
+            }
+        }
+
+        return null;
+    }
 }

@@ -22,7 +22,7 @@ public class Inventory : MonoBehaviour
     #endregion
 
     //Contains the parsed information
-    private List<InventoryItem_Base> availableItems;
+    public List<InventoryItem_Base> AvailableItems;
         
     //Contains the current selected slot
     public int CurrentSelectedSlot = -1;
@@ -38,11 +38,11 @@ public class Inventory : MonoBehaviour
         var temp = JsonInventoryReader.GetItems();
         
         //TODO needs adaption on new Inventory type
-        availableItems.AddRange(temp.Drink);
-        availableItems.AddRange(temp.Food);
-        availableItems.AddRange(temp.Weapon);
-        availableItems.AddRange(temp.Miscellaneous);
-        availableItems.AddRange(temp.Health);
+        AvailableItems.AddRange(temp.Drink);
+        AvailableItems.AddRange(temp.Food);
+        AvailableItems.AddRange(temp.Weapon);
+        AvailableItems.AddRange(temp.Miscellaneous);
+        AvailableItems.AddRange(temp.Health);
     }
 
     public Inventory()
@@ -113,7 +113,7 @@ public class Inventory : MonoBehaviour
         InventoryItem_Base foundItem = null;
         try
         {
-            foundItem = a.First(it => it.Name == type);
+            foundItem = AvailableItems.First(it => it.Name == type);
         }
         catch(Exception ex)
         {
