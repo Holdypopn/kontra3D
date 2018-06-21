@@ -3,12 +3,14 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ScavengeHandling : MonoBehaviour
 {
 
     Player player;
     Inventory inventory;
+    tmpScavengeHelper scavengeHelper;
     //List<InventoryItem_Base> itemList = Inventory.inventoryInstance.AvailableItems;
 
     enum FocusType
@@ -26,12 +28,33 @@ public class ScavengeHandling : MonoBehaviour
     {
         player = Player.playerInstance;
         inventory = Inventory.inventoryInstance;
+        scavengeHelper = tmpScavengeHelper.scavengeHelperInstance;
     }
 
     // Update is called once per frame
     void Update()
     {
 
+    }
+
+    public void Scavenge()
+    {
+        scavengeHelper.inputText.text = player.Health.ToString() + "\n" + player.Hunger.ToString() + "\n" + player.Thirst.ToString();
+
+        FocusType f = FocusType.None;
+
+        if (scavengeHelper.drinkToggle.isOn)
+            f = FocusType.Drink;
+
+        if (scavengeHelper.foodToggle.isOn)
+            f = FocusType.Food;
+
+        if (scavengeHelper.healthToggle.isOn)
+            f = FocusType.Health;
+
+        InventoryItem_Base foundItem = getRandomItem(f);
+        
+        scavengeHelper.outputText.text = foundItem.Name;
     }
 
     /// <summary>
@@ -42,9 +65,9 @@ public class ScavengeHandling : MonoBehaviour
     InventoryItem_Base getRandomItem(FocusType focus = FocusType.None)
     {
         List<InventoryItem_Base> newList = new List<InventoryItem_Base>(Inventory.inventoryInstance.AvailableItems);
-
-        newList = newList.Where(i => i.GetType().Name.Contains(focus.ToString())).ToList();
-        newList.ForEach(x => x.Rarity += 5);
+        
+        if (focus != FocusType.None)
+            newList.Where(i => i.GetType().Name.Contains(focus.ToString())).ToList().ForEach(x => x.Rarity += 5);
 
         int totalRarity = newList.Sum(x => x.Rarity);
         System.Random r = new System.Random();
@@ -56,6 +79,7 @@ public class ScavengeHandling : MonoBehaviour
             totalSoFar += item.Rarity;
             if (totalSoFar > randomNumber)
             {
+                Debug.Log("found item: " + item.Name);
                 return item;
             }
         }
