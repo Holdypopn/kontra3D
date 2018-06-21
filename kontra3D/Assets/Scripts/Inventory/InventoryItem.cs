@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Linq;
-using System.Reflection;
-using UnityEditor.Playables;
-using UnityEngine;
 
+/// <summary>
+/// Eventclass for Inventory events
+/// </summary>
 public class InventoryEventsArgs : EventArgs
 {
     public InventoryEventsArgs(InventoryItem_Base item)
@@ -14,6 +14,10 @@ public class InventoryEventsArgs : EventArgs
     public InventoryItem_Base Item;
 }
 
+
+/// <summary>
+/// Definition of InventoryItems as defined in the JSON script
+/// </summary>
 [Serializable]
 public class InventoryItems
 {
@@ -29,7 +33,8 @@ public class InventoryItem_Base : ICloneable
 {
     public string Name;
     public string Description;
-    
+
+    [HoverMenue(DisplayName = "Max. stack size")]
     public int StackCount;
 
     [HoverMenue(DisplayName = "Rarity of item")]
@@ -48,12 +53,16 @@ public class InventoryItem_Base : ICloneable
             slot = value;
         }
     }
-
+    
     public object Clone()
     {
         return this.MemberwiseClone();
     }
 
+    /// <summary>
+    /// Creates the Info for the Hover menu for the current item
+    /// </summary>
+    /// <returns></returns>
     public string GetHoverMenue()
     {
         string hoverInfo = "[" + this.GetType().Name.Split('_').Last() + "] " + this.Name + "\n"; // f. e. [Food] Steak
@@ -103,6 +112,9 @@ public class InventoryItem_Weapon : InventoryItem_Base
     public string WeaponPoints;
 }
 
+/// <summary>
+/// Attribute class to define parameters in Hovermenu
+/// </summary>
 public class HoverMenue : System.Attribute
 {
     public string DisplayName;

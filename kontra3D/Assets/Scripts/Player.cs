@@ -116,28 +116,26 @@ public class Player : MonoBehaviour {
             onPlayerStatChangedCallback.Invoke();
     }
 
-    public Inventory inventory;
-
     #region TODO: Add item, only for testing suppose
     public void AddItemApplejuice()
     {
-        inventory.AddItem("Applejuice");
+        Inventory.inventoryInstance.AddItem("Applejuice");
     }
     public void AddItemKnife()
     {
-        inventory.AddItem("Knife");
+        Inventory.inventoryInstance.AddItem("Knife");
     }
     public void AddItemStrawberry()
     {
-        inventory.AddItem("Strawberry");
+        Inventory.inventoryInstance.AddItem("Strawberry");
     }
     public void AddSteak()
     {
-        inventory.AddItem("Steak");
+        Inventory.inventoryInstance.AddItem("Steak");
     }
     public void AddAtibiotic()
     {
-        inventory.AddItem("Atibiotic");
+        Inventory.inventoryInstance.AddItem("Atibiotic");
     }
     #endregion
 }

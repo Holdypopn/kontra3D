@@ -1,9 +1,14 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
+/// <summary>
+/// Binding to the Inventory
+///     - Contains a list of all available Items parsed from json
+///     - Add and Remove functions for the inventory
+///     
+/// </summary>
 public class Inventory : MonoBehaviour
 {
     #region Singleton
@@ -21,11 +26,13 @@ public class Inventory : MonoBehaviour
     }
     #endregion
 
-    //Contains the parsed information
+    //Contains a list of all available items
     public List<InventoryItem_Base> AvailableItems;
-
-    //Contains the current selected slot
+    
     private int currentSelectedSlot = -1;
+    /// <summary>
+    /// Current selected slot
+    /// </summary>
     public int CurrentSelectedSlot
     {
         get
@@ -39,6 +46,35 @@ public class Inventory : MonoBehaviour
         }
     }
 
+    //Slot count of the inventory
+    private const int SLOTS = 16;
+
+    //Contains all slots of the inventory
+    private IList<InventorySlot> mSlots = new List<InventorySlot>();
+
+    /// <summary>
+    /// Called if Item is added to the inventory
+    /// </summary>
+    public event EventHandler<InventoryEventsArgs> ItemAdded;
+
+    /// <summary>
+    /// Called if item is selected in the inventory
+    /// </summary>
+    public event EventHandler<InventoryEventsArgs> ItemSelected;
+
+    /// <summary>
+    /// Called if item is removed from the inventory
+    /// </summary>
+    public event EventHandler<InventoryEventsArgs> ItemRemoved;
+
+    /// <summary>
+    /// Called if item is used and removed from the inventory
+    /// </summary>
+    public event EventHandler<InventoryEventsArgs> ItemUsed;
+    
+    /// <summary>
+    /// Event is called when a Item is selected in the Inventory
+    /// </summary>
     private void OnItemSelected()
     {
         InventoryItem_Base item = mSlots.Where(s => s.Id == currentSelectedSlot).First().FirstItem;
@@ -47,12 +83,18 @@ public class Inventory : MonoBehaviour
             ItemSelected(this, new InventoryEventsArgs(item));
     }
 
+    /// <summary>
+    /// Remove the current selected item
+    /// </summary>
     public void RemoveSelectedItem()
     {
         if(currentSelectedSlot != -1)
             RemoveItem(currentSelectedSlot);
     }
 
+    /// <summary>
+    /// Use the current selected item
+    /// </summary>
     public void UseSelectedItem()
     {
         InventoryItem_Base item = null;
@@ -63,20 +105,14 @@ public class Inventory : MonoBehaviour
             ItemUsed(this, new InventoryEventsArgs(item));
     }
 
-    private const int SLOTS = 16;
-
-    private IList<InventorySlot> mSlots = new List<InventorySlot>();
-
-    public event EventHandler<InventoryEventsArgs> ItemAdded;
-    public event EventHandler<InventoryEventsArgs> ItemSelected;
-    public event EventHandler<InventoryEventsArgs> ItemRemoved;
-    public event EventHandler<InventoryEventsArgs> ItemUsed;
-
+    /// <summary>
+    /// Read all available Items from the JSON file
+    /// </summary>
     void Start()
     {
         var temp = JsonInventoryReader.GetItems();
-        
-        //TODO needs adaption on new Inventory type
+
+        //Sums up all Items of the List
         AvailableItems.AddRange(temp.Drink);
         AvailableItems.AddRange(temp.Food);
         AvailableItems.AddRange(temp.Weapon);
@@ -84,6 +120,9 @@ public class Inventory : MonoBehaviour
         AvailableItems.AddRange(temp.Health);
     }
 
+    /// <summary>
+    /// Creates the Inventory with the defined number of slots
+    /// </summary>
     public Inventory()
     {
         for (int i = 0; i < SLOTS; i++)
@@ -92,6 +131,11 @@ public class Inventory : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Finds the next stackable slot for an item
+    /// </summary>
+    /// <param name="item"></param>
+    /// <returns></returns>
     private InventorySlot FindStackableSlot(InventoryItem_Base item)
     {
         foreach (InventorySlot slot in mSlots)
@@ -102,6 +146,10 @@ public class Inventory : MonoBehaviour
         return null;
     }
 
+    /// <summary>
+    /// Finds the next empty slot for an item
+    /// </summary>
+    /// <returns></returns>
     private InventorySlot FindNextEmptySlot()
     {
         foreach (InventorySlot slot in mSlots)
@@ -112,16 +160,19 @@ public class Inventory : MonoBehaviour
         return null;
     }
 
-
-    public void AddItem(string type)
+    /// <summary>
+    /// Add a item to the inventory
+    /// </summary>
+    /// <param name="name"></param>
+    public void AddItem(string name)
     {
         InventoryItem_Base item = null;
 
-        item = GetItem(type);
+        item = GetItem(name);
 
         if (item == null)
         {
-            Debug.Log("The item " + type + "does not exist in available items.");
+            Debug.Log("The item " + name + "does not exist in available items.");
         }
 
         InventorySlot freeSlot = FindStackableSlot(item);
@@ -142,6 +193,11 @@ public class Inventory : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Remove a item from the inventory
+    /// </summary>
+    /// <param name="id"></param>
+    /// <returns></returns>
     private InventoryItem_Base RemoveItem(int id)
     {
         var slot = mSlots.Where(s => s.Id == id).First();

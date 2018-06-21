@@ -75,7 +75,6 @@ GameObject:
   - component: {fileID: 222313016325189886}
   - component: {fileID: 114888619127989296}
   - component: {fileID: 114405665735166978}
-  - component: {fileID: 114389279551565000}
   m_Layer: 10
   m_Name: Slot
   m_TagString: Untagged
@@ -95,7 +94,7 @@ GameObject:
   - component: {fileID: 114841141135305380}
   - component: {fileID: 223306406639125512}
   m_Layer: 10
-  m_Name: HoverMenue
+  m_Name: HoverMenu
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -191,7 +190,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 114436970445878466}
-        m_MethodName: OnClick
+        m_MethodName: OnSlotClick
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -203,17 +202,6 @@ MonoBehaviour:
         m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
---- !u!114 &114389279551565000
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1184866979900108}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f1bee65900aecaa4f92fd219a87ad3d3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &114405665735166978
 MonoBehaviour:
   m_ObjectHideFlags: 1

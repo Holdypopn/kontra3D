@@ -1,18 +1,27 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
+/// <summary>
+/// Binded to the Information Panel:
+///     - Handling of use and remove item click 
+///     - Handling of the update of the InformationPanel when new Item is selected
+/// </summary>
 public class InformationPanel : MonoBehaviour
 {
-    // Use this for initialization
+    /// <summary>
+    /// Subscribe to inventory events
+    /// </summary>
     void Start()
     {
         Inventory.inventoryInstance.ItemSelected += InventoryScript_ItemSelected;
         Inventory.inventoryInstance.ItemRemoved += InventoryScript_ItemRemoved;
     }
 
+    /// <summary>
+    /// Update Information panel when item is removed from Inventory, if(removed == selected)
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
     private void InventoryScript_ItemRemoved(object sender, InventoryEventsArgs e)
     {
         if (Inventory.inventoryInstance.CurrentSelectedSlot == e.Item.Slot.Id && e.Item.Slot.Count == 0)
@@ -25,6 +34,11 @@ public class InformationPanel : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Update information panel when item is selected
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
     private void InventoryScript_ItemSelected(object sender, InventoryEventsArgs e)
     {
         var image = transform.GetChild(1).GetComponent<Image>();
@@ -42,11 +56,17 @@ public class InformationPanel : MonoBehaviour
         }
     }
 
+    /// <summary>
+    ///  When the button "use" is clicked, the inventory gets informed
+    /// </summary>
     public void OnUseClick()
     {
         Inventory.inventoryInstance.UseSelectedItem();
     }
 
+    /// <summary>
+    /// When the button "remove" is clicked, the inventory gets informed
+    /// </summary>
     public void OnRemoveClick()
     {
         Inventory.inventoryInstance.RemoveSelectedItem();

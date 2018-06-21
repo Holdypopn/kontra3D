@@ -51,13 +51,13 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\Inventory\Scripts\InformationPanel.cs" />
-     <Compile Include="Assets\Inventory\Scripts\Inventory.cs" />
-     <Compile Include="Assets\Inventory\Scripts\InventoryItem.cs" />
-     <Compile Include="Assets\Inventory\Scripts\InventoryPanel.cs" />
-     <Compile Include="Assets\Inventory\Scripts\InventorySlot.cs" />
-     <Compile Include="Assets\Inventory\Scripts\JsonInventoryReader.cs" />
-     <Compile Include="Assets\Inventory\Scripts\SlotSelectHandler.cs" />
+     <Compile Include="Assets\Scripts\Inventory\InformationPanel.cs" />
+     <Compile Include="Assets\Scripts\Inventory\Inventory.cs" />
+     <Compile Include="Assets\Scripts\Inventory\InventoryItem.cs" />
+     <Compile Include="Assets\Scripts\Inventory\InventoryPanel.cs" />
+     <Compile Include="Assets\Scripts\Inventory\InventorySlot.cs" />
+     <Compile Include="Assets\Scripts\Inventory\JsonInventoryReader.cs" />
+     <Compile Include="Assets\Scripts\Inventory\SlotSelectHandler.cs" />
      <Compile Include="Assets\Scripts\Player.cs" />
      <Compile Include="Assets\Scripts\PlayerStatsUI.cs" />
      <Compile Include="Assets\Scripts\ScavengeHandling.cs" />

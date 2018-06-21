@@ -7,7 +7,7 @@ using UnityEngine;
 public class JsonInventoryReader : MonoBehaviour
 {
     [SerializeField]
-    private static string path = Application.dataPath + @"\Inventory\Items.json";
+    private static string path = Application.dataPath + @"\Resources\Items.json";
    
     public static InventoryItems GetItems()
     {
