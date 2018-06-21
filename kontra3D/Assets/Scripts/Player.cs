@@ -121,23 +121,23 @@ public class Player : MonoBehaviour {
     #region TODO: Add item, only for testing suppose
     public void AddItemApplejuice()
     {
-        inventory.AddItem(ItemType.Applejuice);
+        inventory.AddItem("Applejuice");
     }
     public void AddItemKnife()
     {
-        inventory.AddItem(ItemType.Knife);
+        inventory.AddItem("Knife");
     }
     public void AddItemStrawberry()
     {
-        inventory.AddItem(ItemType.Strawberry);
+        inventory.AddItem("Strawberry");
     }
     public void AddSteak()
     {
-        inventory.AddItem(ItemType.Steak);
+        inventory.AddItem("Steak");
     }
     public void AddAtibiotic()
     {
-        inventory.AddItem(ItemType.Atibiotic);
+        inventory.AddItem("Atibiotic");
     }
     #endregion
 }
