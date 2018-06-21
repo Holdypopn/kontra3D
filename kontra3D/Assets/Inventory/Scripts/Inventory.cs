@@ -23,15 +23,36 @@ public class Inventory : MonoBehaviour
 
     //Contains the parsed information
     public List<InventoryItem_Base> AvailableItems;
-        
+
     //Contains the current selected slot
-    public int CurrentSelectedSlot = -1;
+    private int currentSelectedSlot = -1;
+    public int CurrentSelectedSlot
+    {
+        get
+        {
+            return currentSelectedSlot;
+        }
+        set
+        {
+            currentSelectedSlot = value;
+            OnItemSelected();
+        }
+    }
+
+    private void OnItemSelected()
+    {
+        InventoryItem_Base item = mSlots.Where(s => s.Id == currentSelectedSlot).First().FirstItem;
+
+        if (ItemSelected != null)
+            ItemSelected(this, new InventoryEventsArgs(item));
+    }
 
     private const int SLOTS = 16;
 
     private IList<InventorySlot> mSlots = new List<InventorySlot>();
 
     public event EventHandler<InventoryEventsArgs> ItemAdded;
+    public event EventHandler<InventoryEventsArgs> ItemSelected;
 
     void Start()
     {

@@ -1,16 +1,16 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class HUD : MonoBehaviour
+public class InventoryPanel : MonoBehaviour
 {
-    public Inventory Inventory;
 
     // Use this for initialization
     void Start()
     {
-        Inventory.ItemAdded += InventoryScript_ItemAdded;
+        Inventory.inventoryInstance.ItemAdded += InventoryScript_ItemAdded;
 
         ////Bring all Hover menues to front
         //foreach (Transform slot in transform.Find("Inventory").Find("InventoryPanel"))//TODO naming abhängig
@@ -18,16 +18,12 @@ public class HUD : MonoBehaviour
         //    Debug.Log(slot.name);
         //    slot.GetChild(0).SetAsLastSibling();
         //    //slot.GetChild(1).SetAsLastSibling();
-        //}
-
     }
-
+    
     private void InventoryScript_ItemAdded(object sender, InventoryEventsArgs e)
     {
-        Transform inventoryPanel = transform.Find("Inventory").Find("InventoryPanel"); //TODO naming abhängig
-
         int index = -1;
-        foreach (Transform slot in inventoryPanel)
+        foreach (Transform slot in transform)
         {
             index++;
                     
@@ -42,7 +38,7 @@ public class HUD : MonoBehaviour
             {
                 image.enabled = true;
 
-                image.sprite = Resources.Load<Sprite>(e.Item.Name + "Icon"); ;
+                image.sprite = Resources.Load<Sprite>(e.Item.Name + "Icon");
 
                 int itemCount = e.Item.Slot.Count;
                 if (itemCount > 1)
