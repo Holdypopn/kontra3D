@@ -47,12 +47,30 @@ public class Inventory : MonoBehaviour
             ItemSelected(this, new InventoryEventsArgs(item));
     }
 
+    public void RemoveSelectedItem()
+    {
+        if(currentSelectedSlot != -1)
+            RemoveItem(currentSelectedSlot);
+    }
+
+    public void UseSelectedItem()
+    {
+        InventoryItem_Base item = null;
+        if (currentSelectedSlot != -1)
+           item = RemoveItem(currentSelectedSlot);
+
+        if (item!= null && ItemUsed != null)
+            ItemUsed(this, new InventoryEventsArgs(item));
+    }
+
     private const int SLOTS = 16;
 
     private IList<InventorySlot> mSlots = new List<InventorySlot>();
 
     public event EventHandler<InventoryEventsArgs> ItemAdded;
     public event EventHandler<InventoryEventsArgs> ItemSelected;
+    public event EventHandler<InventoryEventsArgs> ItemRemoved;
+    public event EventHandler<InventoryEventsArgs> ItemUsed;
 
     void Start()
     {
@@ -124,6 +142,19 @@ public class Inventory : MonoBehaviour
         }
     }
 
+    private InventoryItem_Base RemoveItem(int id)
+    {
+        var slot = mSlots.Where(s => s.Id == id).First();
+        var item = slot.FirstItem;
+        var ret = slot.Remove(item);
+
+        if (ret && ItemRemoved != null)
+        {
+            ItemRemoved(this, new InventoryEventsArgs(item));
+        }
+        return item;
+    }
+
     /// <summary>
     /// Gets the InventoryItem of an type
     /// </summary>
@@ -134,7 +165,7 @@ public class Inventory : MonoBehaviour
         InventoryItem_Base foundItem = null;
         try
         {
-            foundItem = AvailableItems.First(it => it.Name == type);
+            foundItem = (InventoryItem_Base)AvailableItems.First(it => it.Name == type).Clone();
         }
         catch(Exception ex)
         {

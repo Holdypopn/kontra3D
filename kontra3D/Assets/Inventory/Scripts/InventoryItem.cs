@@ -25,7 +25,7 @@ public class InventoryItems
 }
 
 [Serializable]
-public class InventoryItem_Base
+public class InventoryItem_Base : ICloneable
 {
     public string Name;
     public string Description;
@@ -48,6 +48,11 @@ public class InventoryItem_Base
         {
             slot = value;
         }
+    }
+
+    public object Clone()
+    {
+        return this.MemberwiseClone();
     }
 
     public string GetHoverMenue()
