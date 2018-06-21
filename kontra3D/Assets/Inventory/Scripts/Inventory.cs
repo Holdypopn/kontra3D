@@ -41,6 +41,7 @@ public class Inventory : MonoBehaviour
         availableItems.AddRange(temp.Drink);
         availableItems.AddRange(temp.Food);
         availableItems.AddRange(temp.Weapon);
+        availableItems.AddRange(temp.Miscellaneous);
         availableItems.AddRange(temp.Health);
     }
 
