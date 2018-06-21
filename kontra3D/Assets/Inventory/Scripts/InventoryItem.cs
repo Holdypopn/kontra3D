@@ -30,10 +30,9 @@ public class InventoryItem_Base : ICloneable
     public string Name;
     public string Description;
     
-    [HoverMenue]
     public int StackCount;
 
-    [HoverMenue]
+    [HoverMenue(DisplayName = "Rarity of item")]
     public int Rarity;
 
     [NonSerialized]
@@ -61,8 +60,9 @@ public class InventoryItem_Base : ICloneable
 
         //Get all properties for hover menue
         var properties = this.GetType().GetFields().Where(prop => prop.IsDefined(typeof(HoverMenue), false));
+        
 
-        properties.ToList().ForEach(p => hoverInfo += p.Name + " : " + p.GetValue(this) + "\n");
+        properties.ToList().ForEach(p => hoverInfo += ((HoverMenue)p.GetCustomAttributes(typeof(HoverMenue), false).First()).DisplayName + " : " + p.GetValue(this) + "\n"); //f. e. DisplayName : Value
 
         return hoverInfo;
     }
@@ -71,28 +71,28 @@ public class InventoryItem_Base : ICloneable
 [Serializable]
 public class InventoryItem_Drink : InventoryItem_Base
 {
-    [HoverMenue]
+    [HoverMenue(DisplayName = "Drink points")]
     public int DrinkPoints;
 }
 
 [Serializable]
 public class InventoryItem_Food : InventoryItem_Base
 {
-    [HoverMenue]
+    [HoverMenue(DisplayName = "Food points")]
     public int FoodPoints;
 }
 
 [Serializable]
 public class InventoryItem_Health : InventoryItem_Base
 {
-    [HoverMenue]
+    [HoverMenue(DisplayName = "Health points")]
     public int HealthPoints;
 }
 
 [Serializable]
 public class InventoryItem_Miscellaneous : InventoryItem_Base
 {
-    [HoverMenue]
+    [HoverMenue(DisplayName ="Misc points")]
     public string MiscPoints;
 }
 
@@ -103,4 +103,7 @@ public class InventoryItem_Weapon : InventoryItem_Base
     public string WeaponPoints;
 }
 
-public class HoverMenue : System.Attribute { }
+public class HoverMenue : System.Attribute
+{
+    public string DisplayName;
+}
