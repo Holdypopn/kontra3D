@@ -6,6 +6,21 @@ using UnityEngine;
 
 public class Inventory : MonoBehaviour
 {
+    #region Singleton
+    public static Inventory inventoryInstance;
+
+    void Awake()
+    {
+        if (inventoryInstance != null)
+        {
+            Debug.LogWarning("More than one instance of Inventory found!");
+            return;
+        }
+
+        inventoryInstance = this;
+    }
+    #endregion
+
     //Contains the parsed information
     private InventoryItems availableItems;
 
