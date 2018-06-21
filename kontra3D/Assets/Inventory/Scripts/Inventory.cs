@@ -23,6 +23,9 @@ public class Inventory : MonoBehaviour
 
     //Contains the parsed information
     private InventoryItems availableItems;
+        
+    //Contains the current selected slot
+    public int CurrentSelectedSlot = -1;
 
     private const int SLOTS = 16;
 
