@@ -67,7 +67,7 @@ public class Inventory : MonoBehaviour
     }
 
 
-    public void AddItem(ItemType type)
+    public void AddItem(string type)
     {
         InventoryItem_Base item = null;
 
@@ -75,7 +75,7 @@ public class Inventory : MonoBehaviour
 
         if (item == null)
         {
-            Debug.Log("The item " + type.ToString() + "does not exist in available items.");
+            Debug.Log("The item " + type + "does not exist in available items.");
         }
 
         InventorySlot freeSlot = FindStackableSlot(item);
@@ -101,7 +101,7 @@ public class Inventory : MonoBehaviour
     /// </summary>
     /// <param name="type"></param>
     /// <returns></returns>
-    private InventoryItem_Base GetItem(ItemType type)
+    private InventoryItem_Base GetItem(string type)
     {
         List<InventoryItem_Base> allProducts = new List<InventoryItem_Base>();
 
@@ -113,23 +113,14 @@ public class Inventory : MonoBehaviour
         InventoryItem_Base foundItem = null;
         try
         {
-            foundItem = allProducts.First(it => it.Name == type.ToString());
+            foundItem = allProducts.First(it => it.Name == type);
         }
         catch(Exception ex)
         {
-            Debug.Log("Item not found: " + type.ToString());
+            Debug.Log("Item not found: " + type);
             throw ex;
         }
 
         return foundItem;
     }
-}
-
-public enum ItemType
-{
-    Steak,
-    Atibiotic,
-    Knife,
-    Applejuice,
-    Strawberry
 }
