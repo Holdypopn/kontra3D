@@ -54,7 +54,7 @@ public class ScavengeHandling : MonoBehaviour {
 			newList.Add((ICloneable)item.Clone());
 		    });
 		
-		newList.Where(i => i.GetType().Name.contains(focus)).ToList().ForEach(x => x.Rarity + 5)
+		newList.Where(i => i.GetType().Name.contains(focus.ToString())).ToList().ForEach(x => x.Rarity + 5)
 		
 		int totalRarity = newList.Sum(x => x.Rarity);
 		Random r = new Random();
