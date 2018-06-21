@@ -27,6 +27,13 @@
 		"Rareness":"25",
 		"WeaponPoints" : "15"
 	}],
+	"Miscellaneous": [{
+		"Name":"Flashlight",
+		"Description":"Helps in the dark.",
+		"StackCount":"1",
+		"Rareness":"10",
+		"MiscPoints" : "15"
+	}],
 	"Health": [{
 		"Name":"Atibiotic",
 		"Description":"This item regenarates your health.",
