@@ -39,22 +39,13 @@ public class PlayerStats
     /// </summary>
     /// <param name="difference"></param>
     /// <returns>If Player is still alive</returns>
-    public bool UpdatePlayerStats(PlayerStats difference)
+    public void UpdatePlayerStats(PlayerStats difference)
     {
         Health = Health + difference.Health;
         Hunger = Hunger + difference.Hunger;
         Thirst = Thirst + difference.Thirst;
         ActionPoints = ActionPoints + difference.ActionPoints;
-
-        if (Health <= 0)
-        {
-            OnPlayerDie();
-        }
-        else if (Health > 10)
-        {
-            Health = 10;
-        }
-
+        
         if (Hunger <= 0)
         {
             Hunger = 0;
@@ -84,7 +75,14 @@ public class PlayerStats
             ActionPoints = 10;
         }
 
-        return true;
+        if (Health <= 0)
+        {
+            OnPlayerDie();
+        }
+        else if (Health > 10)
+        {
+            Health = 10;
+        }
     }
 
     /// <summary>
