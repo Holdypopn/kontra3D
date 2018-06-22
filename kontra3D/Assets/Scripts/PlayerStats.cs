@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class PlayerStats
 {
+    public static int DefaultPlayerStat = 10;
+
     /// <summary>
     /// Triggers when Player dies
     /// </summary>
@@ -27,10 +29,10 @@ public class PlayerStats
         Thirst = thirst;
     }
 
-    public int Health;
-    public int Hunger;
-    public int Thirst;
-    public int ActionPoints;
+    public int Health = DefaultPlayerStat;
+    public int Hunger = DefaultPlayerStat;
+    public int Thirst = DefaultPlayerStat;
+    public int ActionPoints = DefaultPlayerStat;
 
     /// <summary>
     /// Update the player stats

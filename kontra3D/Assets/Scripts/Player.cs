@@ -7,7 +7,6 @@ using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviour
 {
-
     #region Singleton
     public static Player playerInstance;
 
@@ -23,8 +22,6 @@ public class Player : MonoBehaviour
     }
     #endregion
 
-    private const int defaultPlayerStat = 10;
-
     public delegate void OnPlayerStatChanged();
     public OnPlayerStatChanged onPlayerStatChangedCallback;
 
@@ -32,7 +29,7 @@ public class Player : MonoBehaviour
 
     public Player()
     {
-        playerstats = new PlayerStats(defaultPlayerStat, defaultPlayerStat, defaultPlayerStat, defaultPlayerStat);
+        playerstats = new PlayerStats();
         playerstats.PlayerDie += Playerstats_PlayerDie;
     }
 
@@ -58,7 +55,7 @@ public class Player : MonoBehaviour
         ps.Health = (e.Item is InventoryItem_Health) ? (e.Item as InventoryItem_Health).HealthPoints : 0;
         ps.Hunger = (e.Item is InventoryItem_Food) ? (e.Item as InventoryItem_Food).FoodPoints : 0;
         ps.Thirst = (e.Item is InventoryItem_Drink) ? (e.Item as InventoryItem_Drink).DrinkPoints : 0;
-
+        ps.ActionPoints = 0;
         playerstats.UpdatePlayerStats(ps);
 
         OnPlayerStatsChanged();

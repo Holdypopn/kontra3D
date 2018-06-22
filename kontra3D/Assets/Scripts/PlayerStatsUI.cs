@@ -7,15 +7,15 @@ public class PlayerStatsUI : MonoBehaviour
 {
     Player player;
 
-    Text[] statTexts;
+    Healthbar[] bars;
 
 	// Use this for initialization
 	void Start ()
     {
         player = Player.playerInstance;
         player.onPlayerStatChangedCallback += UpdateUI;
-        
-        statTexts = transform.GetComponentsInChildren<Text>();
+
+        bars = transform.GetComponentsInChildren<Healthbar>();
 
         UpdateUI();
 	}
@@ -23,19 +23,16 @@ public class PlayerStatsUI : MonoBehaviour
     // Update is called once per frame
     void UpdateUI ()
     {
-        foreach (var text in statTexts)
+        foreach (var bar in bars)
         {
-            if (text.name == "HealthText")
-                text.text = "Health: " + player.playerstats.Health;
-
-            if (text.name == "HungerText")
-                text.text = "Hunger: " + player.playerstats.Hunger;
-
-            if (text.name == "ThirstText")
-                text.text = "Thirst: " + player.playerstats.Thirst;
-
-            if (text.name == "APText")
-                text.text = "Action Points: " + player.playerstats.ActionPoints;
+            if (bar.name == "StatusBarHealth")
+                bar.SetHealth(player.playerstats.Health);
+            if (bar.name == "StatusBarFood")
+                bar.SetHealth(player.playerstats.Hunger);
+            if (bar.name == "StatusBarDrink")
+                bar.SetHealth(player.playerstats.Thirst);
+            if (bar.name == "StatusBarAP")
+                bar.SetHealth(player.playerstats.ActionPoints);
         }
     }
 }
