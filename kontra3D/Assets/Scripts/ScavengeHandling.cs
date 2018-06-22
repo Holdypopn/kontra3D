@@ -5,9 +5,6 @@ using UnityEngine.UI;
 
 public class ScavengeHandling : MonoBehaviour
 {
-    Player player;
-    Inventory inventory;
-
     enum FocusType
     {
         Food,
@@ -25,11 +22,6 @@ public class ScavengeHandling : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        player = Player.playerInstance;
-        inventory = Inventory.inventoryInstance;
-
-        var childs = transform.GetComponentsInChildren<Text>();
-        
         var toggles = transform.GetComponentsInChildren<Toggle>();
 
         foreach (var item in toggles)

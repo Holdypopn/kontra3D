@@ -59,9 +59,9 @@
      <Compile Include="Assets\Scripts\Inventory\JsonInventoryReader.cs" />
      <Compile Include="Assets\Scripts\Inventory\SlotSelectHandler.cs" />
      <Compile Include="Assets\Scripts\Player.cs" />
+     <Compile Include="Assets\Scripts\PlayerStats.cs" />
      <Compile Include="Assets\Scripts\PlayerStatsUI.cs" />
      <Compile Include="Assets\Scripts\ScavengeHandling.cs" />
-     <Compile Include="Assets\Scripts\tmpScavengeHelper.cs" />
  <Reference Include="UnityEditor.StandardEvents">
  <HintPath>D:/Git/kontra3D/kontra3D/Library/ScriptAssemblies/UnityEditor.StandardEvents.dll</HintPath>
  </Reference>
