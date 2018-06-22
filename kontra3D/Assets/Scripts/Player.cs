@@ -68,7 +68,7 @@ public class Player : MonoBehaviour
             return false;
         }
 
-        playerstats.UpdatePlayerStats(new PlayerStats(0, -1, -1, -points), false);
+        playerstats.UpdatePlayerStats(new PlayerStats(0, -1, -1, -points), true);
         OnPlayerStatsChanged();
         return true;
     }
