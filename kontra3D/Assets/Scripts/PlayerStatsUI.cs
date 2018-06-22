@@ -3,10 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class PlayerStatsUI : MonoBehaviour {
-
-    public Transform playerStatsCanvas;
-
+public class PlayerStatsUI : MonoBehaviour
+{
     Player player;
 
     Text[] statTexts;
@@ -17,7 +15,7 @@ public class PlayerStatsUI : MonoBehaviour {
         player = Player.playerInstance;
         player.onPlayerStatChangedCallback += UpdateUI;
         
-        statTexts = playerStatsCanvas.GetComponentsInChildren<Text>();
+        statTexts = transform.GetComponentsInChildren<Text>();
 
         UpdateUI();
 	}
@@ -28,16 +26,16 @@ public class PlayerStatsUI : MonoBehaviour {
         foreach (var text in statTexts)
         {
             if (text.name == "HealthText")
-                text.text = "Health: " + player.Health;
+                text.text = "Health: " + player.playerstats.Health;
 
             if (text.name == "HungerText")
-                text.text = "Hunger: " + player.Hunger;
+                text.text = "Hunger: " + player.playerstats.Hunger;
 
             if (text.name == "ThirstText")
-                text.text = "Thirst: " + player.Thirst;
+                text.text = "Thirst: " + player.playerstats.Thirst;
 
-            if (text.name == "FortitudeText")
-                text.text = "Fortitude: " + player.Fortitude;
+            if (text.name == "APText")
+                text.text = "Action Points: " + player.playerstats.ActionPoints;
         }
     }
 }

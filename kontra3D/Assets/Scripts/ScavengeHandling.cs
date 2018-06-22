@@ -1,5 +1,3 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -7,11 +5,8 @@ using UnityEngine.UI;
 
 public class ScavengeHandling : MonoBehaviour
 {
-
     Player player;
     Inventory inventory;
-    tmpScavengeHelper scavengeHelper;
-    //List<InventoryItem_Base> itemList = Inventory.inventoryInstance.AvailableItems;
 
     enum FocusType
     {
@@ -22,39 +17,58 @@ public class ScavengeHandling : MonoBehaviour
         Weapon,
         None
     };
+    
+    private Toggle drinkToggle;
+    private Toggle foodToggle;
+    private Toggle healthToggle;
 
     // Use this for initialization
     void Start()
     {
         player = Player.playerInstance;
         inventory = Inventory.inventoryInstance;
-        scavengeHelper = tmpScavengeHelper.scavengeHelperInstance;
-    }
 
-    // Update is called once per frame
-    void Update()
-    {
+        var childs = transform.GetComponentsInChildren<Text>();
+        
+        var toggles = transform.GetComponentsInChildren<Toggle>();
 
+        foreach (var item in toggles)
+        {
+            if (item.name == "DrinkToggle")
+            {
+                drinkToggle = item;
+            }
+
+            if (item.name == "FoodToggle")
+            {
+                foodToggle = item;
+            }
+
+            if (item.name == "HealthToggle")
+            {
+                healthToggle = item;
+            }
+        }
     }
 
     public void Scavenge()
     {
-        scavengeHelper.inputText.text = player.Health.ToString() + "\n" + player.Hunger.ToString() + "\n" + player.Thirst.ToString();
-
         FocusType f = FocusType.None;
 
-        if (scavengeHelper.drinkToggle.isOn)
+        if (drinkToggle.isOn)
             f = FocusType.Drink;
 
-        if (scavengeHelper.foodToggle.isOn)
+        if (foodToggle.isOn)
             f = FocusType.Food;
 
-        if (scavengeHelper.healthToggle.isOn)
+        if (healthToggle.isOn)
             f = FocusType.Health;
 
         InventoryItem_Base foundItem = getRandomItem(f);
-        
-        scavengeHelper.outputText.text = foundItem.Name;
+
+        Inventory.inventoryInstance.AddItem(foundItem.Name);
+
+        Player.playerInstance.Scavange();
     }
 
     /// <summary>

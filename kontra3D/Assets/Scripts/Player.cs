@@ -1,9 +1,11 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 
-public class Player : MonoBehaviour {
+public class Player : MonoBehaviour
+{
 
     #region Singleton
     public static Player playerInstance;
@@ -20,125 +22,101 @@ public class Player : MonoBehaviour {
     }
     #endregion
 
+    private const int defaultPlayerStat = 10;
+
     public delegate void OnPlayerStatChanged();
     public OnPlayerStatChanged onPlayerStatChangedCallback;
 
-    public int Health;
-    public int Hunger;
-    public int Thirst;
-    public int ActionPoints;
+    public PlayerStats playerstats;
 
     public Player()
     {
-        Health = 10;
-        Hunger = 10;
-        Thirst = 10;
-        ActionPoints = 10;
+        playerstats = new PlayerStats(defaultPlayerStat, defaultPlayerStat, defaultPlayerStat, defaultPlayerStat);
     }
-    
-    private void UpdatePlayerStats(int healthChange, int hungerChange, int thirstChange, int AP)
+    public void Start()
     {
-        Health = Health + healthChange;
-        Hunger = Hunger + hungerChange;
-        Thirst = Thirst + thirstChange;
-        ActionPoints = ActionPoints + AP;
-        
-        if(Health <= 0)
-        {
-            //Game Over!
-        }
-        
-        if(Hunger <= 0)
-        {
-            Hunger = 0;
-            Health -= 1;
-        }
-        else if(Hunger > 10)
-        {
-            Hunger = 10;
-        }
-        
-        if(Thirst <= 0)
-        {
-            Thirst = 0;
-            Health -= 1;
-        }
-        else if(Thirst > 10)
-        {
-            Thirst = 10;
-        }
-        
-        if(ActionPoints <= 0)
-        {
-            ActionPoints = 0;
-            Health -= 1;
-        }
-        else if(ActionPoints > 10)
-        {
-            ActionPoints = 10;
-        }
+        Inventory.inventoryInstance.ItemUsed += InventoryInstance_ItemUsed;
     }
 
+    /// <summary>
+    /// Executed when item is used
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
+    private void InventoryInstance_ItemUsed(object sender, InventoryEventsArgs e)
+    {
+        var ps = new PlayerStats();
+
+        ps.Health = (e.Item is InventoryItem_Health) ? (e.Item as InventoryItem_Health).HealthPoints : 0;
+        ps.Hunger = (e.Item is InventoryItem_Food) ? (e.Item as InventoryItem_Food).FoodPoints : 0;
+        ps.Thirst = (e.Item is InventoryItem_Drink) ? (e.Item as InventoryItem_Drink).DrinkPoints : 0;
+
+        playerstats.UpdatePlayerStats(ps);
+
+        OnPlayerStatsChanged();
+    }
+
+    internal void Scavange()
+    {
+        playerstats.UpdatePlayerStats(new PlayerStats(0, -1, -1, -3));
+        OnPlayerStatsChanged();
+    }
+
+
+    //TODO are the methods necessary??
     public void Sleep()
     {
-        UpdatePlayerStats(0, -1, -2, 2);
-
-        if (onPlayerStatChangedCallback != null)
-            onPlayerStatChangedCallback.Invoke();
+        playerstats.UpdatePlayerStats(new PlayerStats(0, -1, -2, 2));
+        OnPlayerStatsChanged();
     }
 
     public void Eat()
     {
-        UpdatePlayerStats(0, 3, 0, -2);
-
-        if (onPlayerStatChangedCallback != null)
-            onPlayerStatChangedCallback.Invoke();
+        playerstats.UpdatePlayerStats(new PlayerStats(0, 3, 0, -2));
+        OnPlayerStatsChanged();
     }
 
     public void Drink()
     {
-        UpdatePlayerStats(0, 0, 2, -1);
-
-        if (onPlayerStatChangedCallback != null)
-            onPlayerStatChangedCallback.Invoke();
+        playerstats.UpdatePlayerStats(new PlayerStats(0, 0, 2, -1));
+        OnPlayerStatsChanged();
     }
 
     public void Heal()
     {
-        UpdatePlayerStats(3, 0, 0, -3);
-
-        if (onPlayerStatChangedCallback != null)
-            onPlayerStatChangedCallback.Invoke();
+        playerstats.UpdatePlayerStats(new PlayerStats(3, 0, 0, -3));
+        OnPlayerStatsChanged();
     }
 
     public void TakeDamage()
     {
-        UpdatePlayerStats(-3, 0, 0, 0);
-
-        if (onPlayerStatChangedCallback != null)
-            onPlayerStatChangedCallback.Invoke();
+        playerstats.UpdatePlayerStats(new PlayerStats(-3, 0, 0, 0));
+        OnPlayerStatsChanged();
     }
 
     public void GetThristy()
     {
-        UpdatePlayerStats(0, 0, -3, 0);
-
-        if (onPlayerStatChangedCallback != null)
-            onPlayerStatChangedCallback.Invoke();
+        playerstats.UpdatePlayerStats(new PlayerStats(0, 0, -3, 0));
+        OnPlayerStatsChanged();
     }
 
     public void GetHungry()
     {
-        UpdatePlayerStats(0, -3, 0, 0);
-
-        if (onPlayerStatChangedCallback != null)
-            onPlayerStatChangedCallback.Invoke();
+        playerstats.UpdatePlayerStats(new PlayerStats(0, -3, 0, 0));
+        OnPlayerStatsChanged();
     }
 
     public void GetWeak()
     {
-        UpdatePlayerStats(0, 0, 0, -3);
+        playerstats.UpdatePlayerStats(new PlayerStats(0, 0, 0, -3));
+        OnPlayerStatsChanged();
+    }
 
+    /// <summary>
+    /// Execute event when Player stats changes
+    /// </summary>
+    private void OnPlayerStatsChanged()
+    {
         if (onPlayerStatChangedCallback != null)
             onPlayerStatChangedCallback.Invoke();
     }
