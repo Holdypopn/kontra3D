@@ -26,21 +26,62 @@ public class Player : MonoBehaviour {
     public int Health;
     public int Hunger;
     public int Thirst;
-    public int Fortitude;
+    public int ActionPoints;
 
     public Player()
     {
-        Health = 100;
-        Hunger = 100;
-        Thirst = 100;
-        Fortitude = 100;
+        Health = 10;
+        Hunger = 10;
+        Thirst = 10;
+        ActionPoints = 10;
+    }
+    
+    private void UpdatePlayerStats(int healthChange, int hungerChange, int thirstChange, int AP)
+    {
+        Health = Health + healthChange;
+        Hunger = Hunger + hungerChange;
+        Thirst = Thirst + thirstChange;
+        ActionPoints = ActionPoints + AP;
+        
+        if(Health <= 0)
+        {
+            //Game Over!
+        }
+        
+        if(Hunger <= 0)
+        {
+            Hunger = 0;
+            Health -= 1;
+        }
+        else if(Hunger > 10)
+        {
+            Hunger = 10;
+        }
+        
+        if(Thirst <= 0)
+        {
+            Thirst = 0;
+            Health -= 1;
+        }
+        else if(Thirst > 10)
+        {
+            Thirst = 10;
+        }
+        
+        if(ActionPoints <= 0)
+        {
+            ActionPoints = 0;
+            Health -= 1;
+        }
+        else if(ActionPoints > 10)
+        {
+            ActionPoints = 10;
+        }
     }
 
     public void Sleep()
     {
-        Fortitude += 10;
-        if (Fortitude > 100)
-            Fortitude = 100;
+        UpdatePlayerStats(0, -1, -2, 2);
 
         if (onPlayerStatChangedCallback != null)
             onPlayerStatChangedCallback.Invoke();
@@ -48,9 +89,7 @@ public class Player : MonoBehaviour {
 
     public void Eat()
     {
-        Hunger += 10;
-        if (Hunger > 100)
-            Hunger = 100;
+        UpdatePlayerStats(0, 3, 0, -2);
 
         if (onPlayerStatChangedCallback != null)
             onPlayerStatChangedCallback.Invoke();
@@ -58,9 +97,7 @@ public class Player : MonoBehaviour {
 
     public void Drink()
     {
-        Thirst += 10;
-        if (Thirst > 100)
-            Thirst = 100;
+        UpdatePlayerStats(0, 0, 2, -1);
 
         if (onPlayerStatChangedCallback != null)
             onPlayerStatChangedCallback.Invoke();
@@ -68,9 +105,7 @@ public class Player : MonoBehaviour {
 
     public void Heal()
     {
-        Health += 10;
-        if (Health > 100)
-            Health = 100;
+        UpdatePlayerStats(3, 0, 0, -3);
 
         if (onPlayerStatChangedCallback != null)
             onPlayerStatChangedCallback.Invoke();
@@ -78,9 +113,7 @@ public class Player : MonoBehaviour {
 
     public void TakeDamage()
     {
-        Health -= 10;
-        if (Health < 0)
-            Health = 0;
+        UpdatePlayerStats(-3, 0, 0, 0);
 
         if (onPlayerStatChangedCallback != null)
             onPlayerStatChangedCallback.Invoke();
@@ -88,9 +121,7 @@ public class Player : MonoBehaviour {
 
     public void GetThristy()
     {
-        Thirst -= 10;
-        if (Thirst < 0)
-            Thirst = 0;
+        UpdatePlayerStats(0, 0, -3, 0);
 
         if (onPlayerStatChangedCallback != null)
             onPlayerStatChangedCallback.Invoke();
@@ -98,9 +129,7 @@ public class Player : MonoBehaviour {
 
     public void GetHungry()
     {
-        Hunger -= 10;
-        if (Hunger < 0)
-            Hunger = 0;
+        UpdatePlayerStats(0, -3, 0, 0);
 
         if (onPlayerStatChangedCallback != null)
             onPlayerStatChangedCallback.Invoke();
@@ -108,9 +137,7 @@ public class Player : MonoBehaviour {
 
     public void GetWeak()
     {
-        Fortitude -= 10;
-        if (Fortitude < 0)
-            Fortitude = 0;
+        UpdatePlayerStats(0, 0, 0, -3);
 
         if (onPlayerStatChangedCallback != null)
             onPlayerStatChangedCallback.Invoke();
