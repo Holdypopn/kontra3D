@@ -58,10 +58,27 @@
      <Compile Include="Assets\Scripts\Inventory\InventorySlot.cs" />
      <Compile Include="Assets\Scripts\Inventory\JsonInventoryReader.cs" />
      <Compile Include="Assets\Scripts\Inventory\SlotSelectHandler.cs" />
+     <Compile Include="Assets\Scripts\MainMenu.cs" />
      <Compile Include="Assets\Scripts\Player.cs" />
      <Compile Include="Assets\Scripts\PlayerStats.cs" />
      <Compile Include="Assets\Scripts\PlayerStatsUI.cs" />
      <Compile Include="Assets\Scripts\ScavengeHandling.cs" />
+     <None Include="Assets\AssetStore\TextMesh Pro\Resources\LineBreaking Leading Characters.txt" />
+     <None Include="Assets\AssetStore\TextMesh Pro\Resources\Shaders\TMP_Bitmap-Mobile.shader" />
+     <None Include="Assets\AssetStore\TextMesh Pro\Resources\Shaders\TMPro_Surface.cginc" />
+     <None Include="Assets\AssetStore\TextMesh Pro\Resources\Shaders\TMP_SDF-Surface.shader" />
+     <None Include="Assets\AssetStore\TextMesh Pro\Resources\Shaders\TMP_SDF.shader" />
+     <None Include="Assets\AssetStore\TextMesh Pro\Resources\Shaders\TMP_SDF-Mobile Overlay.shader" />
+     <None Include="Assets\AssetStore\TextMesh Pro\Resources\Shaders\TMPro_Properties.cginc" />
+     <None Include="Assets\AssetStore\TextMesh Pro\Resources\Shaders\TMP_SDF-Surface-Mobile.shader" />
+     <None Include="Assets\AssetStore\TextMesh Pro\Resources\Shaders\TMP_SDF Overlay.shader" />
+     <None Include="Assets\AssetStore\TextMesh Pro\Resources\Shaders\TMPro.cginc" />
+     <None Include="Assets\AssetStore\TextMesh Pro\Resources\Shaders\TMP_SDF-Mobile Masking.shader" />
+     <None Include="Assets\AssetStore\TextMesh Pro\Resources\Shaders\TMP_Bitmap.shader" />
+     <None Include="Assets\AssetStore\TextMesh Pro\Resources\Shaders\TMP_Sprite.shader" />
+     <None Include="Assets\AssetStore\TextMesh Pro\Resources\Shaders\TMP_SDF-Mobile.shader" />
+     <None Include="Assets\AssetStore\TextMesh Pro\Sprites\EmojiOne Attribution.txt" />
+     <None Include="Assets\AssetStore\TextMesh Pro\Resources\LineBreaking Following Characters.txt" />
  <Reference Include="UnityEditor.StandardEvents">
  <HintPath>D:/Git/kontra3D/kontra3D/Library/ScriptAssemblies/UnityEditor.StandardEvents.dll</HintPath>
  </Reference>
@@ -271,6 +288,12 @@
  </Reference>
  <Reference Include="UnityEngine.StandardEvents">
  <HintPath>C:/Users/Michi/AppData/Local/Unity/cache/packages/packages.unity.com/com.unity.standardevents@1.0.13/UnityEngine.StandardEvents.dll</HintPath>
+ </Reference>
+ <Reference Include="TextMeshPro-2017.3-Runtime">
+ <HintPath>D:/Git/kontra3D/kontra3D/Assets/AssetStore/TextMesh Pro/Plugins/Editor DLL/TextMeshPro-2017.3-Runtime.dll</HintPath>
+ </Reference>
+ <Reference Include="TextMeshPro-2017.3-Editor">
+ <HintPath>D:/Git/kontra3D/kontra3D/Assets/AssetStore/TextMesh Pro/Plugins/Editor DLL/TextMeshPro-2017.3-Editor.dll</HintPath>
  </Reference>
  <Reference Include="mscorlib">
  <HintPath>C:/Program Files/Unity/Editor/Data/MonoBleedingEdge/lib/mono/unity/mscorlib.dll</HintPath>

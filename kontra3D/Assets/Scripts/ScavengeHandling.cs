@@ -18,6 +18,7 @@ public class ScavengeHandling : MonoBehaviour
     private Toggle drinkToggle;
     private Toggle foodToggle;
     private Toggle healthToggle;
+    private Toggle noneToggle;
 
     // Use this for initialization
     void Start()
@@ -40,11 +41,22 @@ public class ScavengeHandling : MonoBehaviour
             {
                 healthToggle = item;
             }
+            
+            if (item.name == "NoneToggle")
+            {
+                noneToggle = item;
+            }
         }
     }
 
     public void Scavenge()
     {
+        if (!Player.playerInstance.Scavange(noneToggle.isOn ? 1 : 2))
+        {
+            Debug.Log("No AP for Scavange available");
+            return;
+        }
+
         FocusType f = FocusType.None;
 
         if (drinkToggle.isOn)
@@ -60,7 +72,6 @@ public class ScavengeHandling : MonoBehaviour
 
         Inventory.inventoryInstance.AddItem(foundItem.Name);
 
-        Player.playerInstance.Scavange();
     }
 
     /// <summary>

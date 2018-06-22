@@ -76,7 +76,6 @@ public class PlayerStats
         if (ActionPoints <= 0)
         {
             ActionPoints = 0;
-            Health -= 1;
         }
         else if (ActionPoints > 10)
         {

@@ -3,35 +3,35 @@
 		"Name":"Steak",
 		"Description":"Regenerates food points.",
 		"StackCount":"2",
-		"Rarity":"25",
-		"FoodPoints":"20"
+		"Rarity":"10",
+		"FoodPoints":"2"
 	},
 	{
 		"Name":"Strawberry",
 		"Description":"Regenerates food points.",
 		"StackCount":"5",
-		"Rarity":"40",
-		"FoodPoints":"5"
+		"Rarity":"20",
+		"FoodPoints":"1"
 	}],
 	"Drink": [{
 		"Name":"Applejuice",
 		"Description":"Regenerates drink points.",
 		"StackCount":"2",
-		"Rarity":"25",
-		"DrinkPoints":"25"
+		"Rarity":"20",
+		"DrinkPoints":"2"
 	}],
 	"Weapon": [{
 		"Name":"Knife",
 		"Description":"You can use this item to attack enemies.",
 		"StackCount":"1",
-		"Rarity":"25",
+		"Rarity":"5",
 		"WeaponPoints" : "15"
 	}],
 	"Miscellaneous": [{
 		"Name":"Flashlight",
 		"Description":"Helps in the dark.",
 		"StackCount":"1",
-		"Rarity":"10",
+		"Rarity":"3",
 		"MiscPoints" : "15"
 	}],
 	"Health": [{
@@ -39,6 +39,6 @@
 		"Description":"This item regenarates your health.",
 		"StackCount":"2",
 		"Rarity":"10",
-		"HealthPoints":"50"
+		"HealthPoints":"3"
 	}]
 }

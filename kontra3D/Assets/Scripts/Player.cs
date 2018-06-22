@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviour
 {
@@ -32,7 +33,14 @@ public class Player : MonoBehaviour
     public Player()
     {
         playerstats = new PlayerStats(defaultPlayerStat, defaultPlayerStat, defaultPlayerStat, defaultPlayerStat);
+        playerstats.PlayerDie += Playerstats_PlayerDie;
     }
+
+    private void Playerstats_PlayerDie(object sender, EventArgs e)
+    {
+        SceneManager.LoadScene("GameoverMenu");
+    }
+
     public void Start()
     {
         Inventory.inventoryInstance.ItemUsed += InventoryInstance_ItemUsed;
@@ -56,10 +64,16 @@ public class Player : MonoBehaviour
         OnPlayerStatsChanged();
     }
 
-    internal void Scavange()
+    internal bool Scavange(int points = 1)
     {
-        playerstats.UpdatePlayerStats(new PlayerStats(0, -1, -1, -3));
+        if (playerstats.ActionPoints < points)
+        {
+            return false;
+        }
+
+        playerstats.UpdatePlayerStats(new PlayerStats(0, -1, -1, -points));
         OnPlayerStatsChanged();
+        return true;
     }
 
 
