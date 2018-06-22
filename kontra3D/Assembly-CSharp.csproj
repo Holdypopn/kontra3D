@@ -51,7 +51,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\Healthbar.cs" />
+     <Compile Include="Assets\Scripts\General\Healthbar.cs" />
+     <Compile Include="Assets\Scripts\General\MainMenu.cs" />
      <Compile Include="Assets\Scripts\Inventory\InformationPanel.cs" />
      <Compile Include="Assets\Scripts\Inventory\Inventory.cs" />
      <Compile Include="Assets\Scripts\Inventory\InventoryItem.cs" />
@@ -59,11 +60,10 @@
      <Compile Include="Assets\Scripts\Inventory\InventorySlot.cs" />
      <Compile Include="Assets\Scripts\Inventory\JsonInventoryReader.cs" />
      <Compile Include="Assets\Scripts\Inventory\SlotSelectHandler.cs" />
-     <Compile Include="Assets\Scripts\MainMenu.cs" />
-     <Compile Include="Assets\Scripts\Player.cs" />
-     <Compile Include="Assets\Scripts\PlayerStats.cs" />
-     <Compile Include="Assets\Scripts\PlayerStatsUI.cs" />
-     <Compile Include="Assets\Scripts\ScavengeHandling.cs" />
+     <Compile Include="Assets\Scripts\Player\Player.cs" />
+     <Compile Include="Assets\Scripts\Player\PlayerStats.cs" />
+     <Compile Include="Assets\Scripts\Player\PlayerStatsUI.cs" />
+     <Compile Include="Assets\Scripts\Scavenge\ScavengeHandling.cs" />
      <None Include="Assets\AssetStore\TextMesh Pro\Resources\LineBreaking Leading Characters.txt" />
      <None Include="Assets\AssetStore\TextMesh Pro\Resources\Shaders\TMP_Bitmap-Mobile.shader" />
      <None Include="Assets\AssetStore\TextMesh Pro\Resources\Shaders\TMPro_Surface.cginc" />

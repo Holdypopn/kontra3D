@@ -22,15 +22,21 @@ public class Player : MonoBehaviour
     }
     #endregion
 
+    /// <summary>
+    /// Is called when status is changed
+    /// </summary>
     public delegate void OnPlayerStatChanged();
     public OnPlayerStatChanged onPlayerStatChangedCallback;
 
-    public PlayerStats playerstats;
+    /// <summary>
+    /// Stats of the Player
+    /// </summary>
+    public PlayerStats Playerstats;
 
     public Player()
     {
-        playerstats = new PlayerStats();
-        playerstats.PlayerDie += Playerstats_PlayerDie;
+        Playerstats = new PlayerStats();
+        Playerstats.PlayerDie += Playerstats_PlayerDie;
     }
 
     private void Playerstats_PlayerDie(object sender, EventArgs e)
@@ -56,72 +62,42 @@ public class Player : MonoBehaviour
         ps.Hunger = (e.Item is InventoryItem_Food) ? (e.Item as InventoryItem_Food).FoodPoints : 0;
         ps.Thirst = (e.Item is InventoryItem_Drink) ? (e.Item as InventoryItem_Drink).DrinkPoints : 0;
         ps.ActionPoints = 0;
-        playerstats.UpdatePlayerStats(ps);
+        Playerstats.UpdatePlayerStats(ps);
 
         OnPlayerStatsChanged();
     }
 
+    /// <summary>
+    /// Player search new items and loose AP
+    /// </summary>
+    /// <param name="points"></param>
+    /// <returns></returns>
     internal bool Scavange(int points = 1)
     {
-        if (playerstats.ActionPoints < points)
+        if (Playerstats.ActionPoints < points)
         {
             return false;
         }
 
-        playerstats.UpdatePlayerStats(new PlayerStats(0, -1, -1, -points), true);
+        Playerstats.UpdatePlayerStats(new PlayerStats(0, -1, -1, -points), true);
         OnPlayerStatsChanged();
         return true;
     }
 
-
-    //TODO are the methods necessary??
+    /// <summary>
+    /// Player sleeps and gets AP
+    /// </summary>
     public void Sleep()
     {
-        playerstats.UpdatePlayerStats(new PlayerStats(0, -1, -2, 2));
+        if(Playerstats.Hunger ==0 || Playerstats.Thirst == 0)
+        {
+            Debug.Log("Could not sleep regarding no food!"); //TODO possible deadlog-> Gameover??
+            return;
+        }
+        Playerstats.UpdatePlayerStats(new PlayerStats(0, -1, -1, 2));
         OnPlayerStatsChanged();
     }
 
-    public void Eat()
-    {
-        playerstats.UpdatePlayerStats(new PlayerStats(0, 3, 0, -2));
-        OnPlayerStatsChanged();
-    }
-
-    public void Drink()
-    {
-        playerstats.UpdatePlayerStats(new PlayerStats(0, 0, 2, -1));
-        OnPlayerStatsChanged();
-    }
-
-    public void Heal()
-    {
-        playerstats.UpdatePlayerStats(new PlayerStats(3, 0, 0, -3));
-        OnPlayerStatsChanged();
-    }
-
-    public void TakeDamage()
-    {
-        playerstats.UpdatePlayerStats(new PlayerStats(-3, 0, 0, 0));
-        OnPlayerStatsChanged();
-    }
-
-    public void GetThristy()
-    {
-        playerstats.UpdatePlayerStats(new PlayerStats(0, 0, -3, 0));
-        OnPlayerStatsChanged();
-    }
-
-    public void GetHungry()
-    {
-        playerstats.UpdatePlayerStats(new PlayerStats(0, -3, 0, 0));
-        OnPlayerStatsChanged();
-    }
-
-    public void GetWeak()
-    {
-        playerstats.UpdatePlayerStats(new PlayerStats(0, 0, 0, -3));
-        OnPlayerStatsChanged();
-    }
 
     /// <summary>
     /// Execute event when Player stats changes
@@ -131,27 +107,4 @@ public class Player : MonoBehaviour
         if (onPlayerStatChangedCallback != null)
             onPlayerStatChangedCallback.Invoke();
     }
-
-    #region TODO: Add item, only for testing suppose
-    public void AddItemApplejuice()
-    {
-        Inventory.inventoryInstance.AddItem("Applejuice");
-    }
-    public void AddItemKnife()
-    {
-        Inventory.inventoryInstance.AddItem("Knife");
-    }
-    public void AddItemStrawberry()
-    {
-        Inventory.inventoryInstance.AddItem("Strawberry");
-    }
-    public void AddSteak()
-    {
-        Inventory.inventoryInstance.AddItem("Steak");
-    }
-    public void AddAtibiotic()
-    {
-        Inventory.inventoryInstance.AddItem("Atibiotic");
-    }
-    #endregion
 }

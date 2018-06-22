@@ -26,13 +26,13 @@ public class PlayerStatsUI : MonoBehaviour
         foreach (var bar in bars)
         {
             if (bar.name == "StatusBarHealth")
-                bar.SetHealth(player.playerstats.Health);
+                bar.SetHealth(player.Playerstats.Health);
             if (bar.name == "StatusBarFood")
-                bar.SetHealth(player.playerstats.Hunger);
+                bar.SetHealth(player.Playerstats.Hunger);
             if (bar.name == "StatusBarDrink")
-                bar.SetHealth(player.playerstats.Thirst);
+                bar.SetHealth(player.Playerstats.Thirst);
             if (bar.name == "StatusBarAP")
-                bar.SetHealth(player.playerstats.ActionPoints);
+                bar.SetHealth(player.Playerstats.ActionPoints);
         }
     }
 }

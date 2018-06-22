@@ -41,37 +41,29 @@ public class ScavengeHandling : MonoBehaviour
             {
                 healthToggle = item;
             }
-            
-            if (item.name == "NoneToggle")
-            {
-                noneToggle = item;
-            }
         }
     }
 
     public void Scavenge()
     {
-        if (!Player.playerInstance.Scavange(noneToggle.isOn ? 1 : 2))
+        FocusType f = FocusType.None;
+
+        if (drinkToggle.isOn)
+            f = FocusType.Drink;
+        else if (foodToggle.isOn)
+            f = FocusType.Food;
+        else if (healthToggle.isOn)
+            f = FocusType.Health;
+        
+        if (!Player.playerInstance.Scavange(f == FocusType.None ? 1 : 2))
         {
             Debug.Log("No AP for Scavange available");
             return;
         }
 
-        FocusType f = FocusType.None;
-
-        if (drinkToggle.isOn)
-            f = FocusType.Drink;
-
-        if (foodToggle.isOn)
-            f = FocusType.Food;
-
-        if (healthToggle.isOn)
-            f = FocusType.Health;
-
         InventoryItem_Base foundItem = getRandomItem(f);
 
         Inventory.inventoryInstance.AddItem(foundItem.Name);
-
     }
 
     /// <summary>
