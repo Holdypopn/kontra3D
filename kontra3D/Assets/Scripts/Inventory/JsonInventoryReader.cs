@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.IO;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class JsonInventoryReader : MonoBehaviour
 {
@@ -11,13 +7,6 @@ public class JsonInventoryReader : MonoBehaviour
    
     public static InventoryItems GetItems()
     {
-        InventoryItems parsedData;
-        using (StreamReader stream = new StreamReader(path))
-        {
-            string json = stream.ReadToEnd();
-            parsedData = JsonUtility.FromJson<InventoryItems>(json);
-        }
-
-        return parsedData;
+        return JsonUtility.FromJson<InventoryItems>(Resources.Load<TextAsset>("Items").text);
     }
 }
