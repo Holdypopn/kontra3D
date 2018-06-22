@@ -39,7 +39,7 @@ public class PlayerStats
     /// </summary>
     /// <param name="difference"></param>
     /// <returns>If Player is still alive</returns>
-    public void UpdatePlayerStats(PlayerStats difference)
+    public void UpdatePlayerStats(PlayerStats difference, bool removeHealth = false)
     {
         Health = Health + difference.Health;
         Hunger = Hunger + difference.Hunger;
@@ -49,7 +49,7 @@ public class PlayerStats
         if (Hunger <= 0)
         {
             Hunger = 0;
-            Health -= 1;
+            if(removeHealth) Health -= 1;
         }
         else if (Hunger > 10)
         {
@@ -59,7 +59,7 @@ public class PlayerStats
         if (Thirst <= 0)
         {
             Thirst = 0;
-            Health -= 1;
+            if (removeHealth) Health -= 1;
         }
         else if (Thirst > 10)
         {
