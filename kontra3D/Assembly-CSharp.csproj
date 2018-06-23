@@ -60,7 +60,6 @@
      <Compile Include="Assets\Scripts\Inventory\InventoryPanel.cs" />
      <Compile Include="Assets\Scripts\Inventory\InventorySlot.cs" />
      <Compile Include="Assets\Scripts\Inventory\ItemDragHandler.cs" />
-     <Compile Include="Assets\Scripts\Inventory\ItemDropHandler.cs" />
      <Compile Include="Assets\Scripts\Inventory\JsonInventoryReader.cs" />
      <Compile Include="Assets\Scripts\Inventory\SlotSelectHandler.cs" />
      <Compile Include="Assets\Scripts\Player\Player.cs" />
