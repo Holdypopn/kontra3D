@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 
 /// <summary>
@@ -6,7 +7,7 @@
 ///     - Defines a slot with ID and size which allows to stack items in a slot
 ///     - Info about the stack count
 /// </summary>
-public class InventorySlot
+public class InventorySlot : ICloneable
 {
     //Contains the Stack of the slot
     public Stack<InventoryItem_Base> ItemStack = new Stack<InventoryItem_Base>();
@@ -107,5 +108,10 @@ public class InventorySlot
             return true;
         }
         return false;
+    }
+
+    public object Clone()
+    {
+        return this.MemberwiseClone();
     }
 }
