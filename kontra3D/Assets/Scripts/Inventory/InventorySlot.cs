@@ -9,7 +9,7 @@
 public class InventorySlot
 {
     //Contains the Stack of the slot
-    private Stack<InventoryItem_Base> mItemStack = new Stack<InventoryItem_Base>();
+    public Stack<InventoryItem_Base> ItemStack = new Stack<InventoryItem_Base>();
 
     //Id of the slot
     private int id = 0;
@@ -29,6 +29,7 @@ public class InventorySlot
     public int Id
     {
         get { return id; }
+        set { id = value; }
     }
 
     /// <summary>
@@ -38,7 +39,7 @@ public class InventorySlot
     public void AddItem(InventoryItem_Base item)
     {
         item.Slot = this;
-        mItemStack.Push(item);
+        ItemStack.Push(item);
     }
 
     /// <summary>
@@ -51,7 +52,7 @@ public class InventorySlot
             if (IsEmpty)
                 return null;
 
-            return mItemStack.Peek();
+            return ItemStack.Peek();
         }
     }
 
@@ -62,10 +63,10 @@ public class InventorySlot
     /// <returns></returns>
     public bool IsStackable(InventoryItem_Base item)
     {
-        if (IsEmpty || item.StackCount == mItemStack.Count)
+        if (IsEmpty || item.StackCount == ItemStack.Count)
             return false;
 
-        InventoryItem_Base first = mItemStack.Peek();
+        InventoryItem_Base first = ItemStack.Peek();
 
         if (first.Name == item.Name)
             return true;
@@ -86,7 +87,7 @@ public class InventorySlot
     /// </summary>
     public int Count
     {
-        get { return mItemStack.Count; }
+        get { return ItemStack.Count; }
     }
 
     /// <summary>
@@ -99,10 +100,10 @@ public class InventorySlot
         if (IsEmpty)
             return false;
 
-        InventoryItem_Base first = mItemStack.Peek();
+        InventoryItem_Base first = ItemStack.Peek();
         if (first.Name == item.Name)
         {
-            mItemStack.Pop();
+            ItemStack.Pop();
             return true;
         }
         return false;

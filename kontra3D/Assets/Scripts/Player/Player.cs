@@ -7,6 +7,7 @@ using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviour
 {
+    public Camera MainCamera;
     #region Singleton
     public static Player playerInstance;
 

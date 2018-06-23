@@ -71,7 +71,12 @@ public class Inventory : MonoBehaviour
     /// Called if item is used and removed from the inventory
     /// </summary>
     public event EventHandler<InventoryEventsArgs> ItemUsed;
-    
+
+    /// <summary>
+    /// Called if item slots are changed
+    /// </summary>
+    public event EventHandler<InventoryChangeEventsArgs> ItemSlotChanged;
+
     /// <summary>
     /// Event is called when a Item is selected in the Inventory
     /// </summary>
@@ -81,6 +86,28 @@ public class Inventory : MonoBehaviour
 
         if (ItemSelected != null)
             ItemSelected(this, new InventoryEventsArgs(item));
+    }
+
+    public void ChangeItems(int id1, int id2)
+    {
+        //Change Item stacks
+        var slot1ItemStack = mSlots[id1].ItemStack;
+        mSlots[id1].ItemStack = mSlots[id2].ItemStack;
+        mSlots[id2].ItemStack = slot1ItemStack;
+
+        //Change item slots
+        foreach (var item in mSlots[id1].ItemStack)
+        {
+            item.Slot = mSlots[id1];
+        }
+
+        foreach (var item in mSlots[id2].ItemStack)
+        {
+            item.Slot = mSlots[id2];
+        }
+
+        if (ItemSlotChanged != null)
+            ItemSlotChanged(this, new InventoryChangeEventsArgs(mSlots));
     }
 
     /// <summary>

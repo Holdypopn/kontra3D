@@ -57,6 +57,7 @@ GameObject:
   - component: {fileID: 224166311764269308}
   - component: {fileID: 222744380306267924}
   - component: {fileID: 114758193063082004}
+  - component: {fileID: 114567785806921008}
   m_Layer: 10
   m_Name: ItemImage
   m_TagString: Untagged
@@ -149,7 +150,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Empty Slot
+  m_Text: 
 --- !u!114 &114149621771185298
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -170,7 +171,7 @@ MonoBehaviour:
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 0.1745283, g: 0.27461922, b: 1, a: 1}
+    m_HighlightedColor: {r: 0, g: 0.18542755, b: 0.9811321, a: 1}
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
     m_ColorMultiplier: 1
@@ -293,6 +294,17 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: 
+--- !u!114 &114567785806921008
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1138861382408598}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d232d17cd521e78488b1c2b9c9267aa2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114754906690013776
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -521,7 +533,7 @@ RectTransform:
   m_GameObject: {fileID: 1184866979900108}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.9999986, y: 0.9999986, z: 0.9999986}
+  m_LocalScale: {x: 1.0000061, y: 1.0000061, z: 1.0000061}
   m_Children:
   - {fileID: 224382180758933252}
   - {fileID: 224792984358707846}

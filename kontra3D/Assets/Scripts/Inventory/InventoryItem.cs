@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
 /// <summary>
@@ -12,6 +13,19 @@ public class InventoryEventsArgs : EventArgs
     }
 
     public InventoryItem_Base Item;
+}
+
+/// <summary>
+/// Eventclass for Inventory change events
+/// </summary>
+public class InventoryChangeEventsArgs : EventArgs
+{
+    public InventoryChangeEventsArgs(IList<InventorySlot> slots)
+    {
+        Slots = slots;
+    }
+
+    public IList<InventorySlot> Slots;
 }
 
 
