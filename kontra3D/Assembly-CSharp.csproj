@@ -53,6 +53,7 @@
   <ItemGroup>
      <Compile Include="Assets\Scripts\General\Healthbar.cs" />
      <Compile Include="Assets\Scripts\General\MainMenu.cs" />
+     <Compile Include="Assets\Scripts\General\MenuBar.cs" />
      <Compile Include="Assets\Scripts\General\Score.cs" />
      <Compile Include="Assets\Scripts\Inventory\InformationPanel.cs" />
      <Compile Include="Assets\Scripts\Inventory\Inventory.cs" />
