@@ -63,7 +63,7 @@ public class Player : MonoBehaviour
         ps.Thirst = (e.Item is InventoryItem_Drink) ? (e.Item as InventoryItem_Drink).DrinkPoints : 0;
         ps.ActionPoints = 0;
         Playerstats.UpdatePlayerStats(ps);
-
+        
         OnPlayerStatsChanged();
     }
 
@@ -107,4 +107,6 @@ public class Player : MonoBehaviour
         if (onPlayerStatChangedCallback != null)
             onPlayerStatChangedCallback.Invoke();
     }
+
+    
 }

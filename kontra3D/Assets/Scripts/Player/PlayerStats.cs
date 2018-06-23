@@ -12,6 +12,11 @@ public class PlayerStats
     /// </summary>
     public event EventHandler PlayerDie;
 
+    /// <summary>
+    /// Is called AP value is changed
+    /// </summary>
+    public event EventHandler<ApChangeEventArgs> OnApValueChanged;
+
     public PlayerStats() { }
 
     /// <summary>
@@ -41,6 +46,9 @@ public class PlayerStats
     /// <returns>If Player is still alive</returns>
     public void UpdatePlayerStats(PlayerStats difference, bool removeHealth = false)
     {
+        if(difference.ActionPoints != 0)
+            NotifyApValueChange(difference.ActionPoints);
+
         Health = Health + difference.Health;
         Hunger = Hunger + difference.Hunger;
         Thirst = Thirst + difference.Thirst;
@@ -86,6 +94,15 @@ public class PlayerStats
     }
 
     /// <summary>
+    /// Execute event when AP value changes
+    /// </summary>
+    private void NotifyApValueChange(int apChange)
+    {
+        if (OnApValueChanged != null)
+            OnApValueChanged(this, new ApChangeEventArgs(apChange));
+    }
+
+    /// <summary>
     /// Execute event when player dies
     /// </summary>
     private void OnPlayerDie()
@@ -95,4 +112,14 @@ public class PlayerStats
             PlayerDie(this, null);
         }
     }
+}
+
+public class ApChangeEventArgs : EventArgs
+{
+    public ApChangeEventArgs(int apChange)
+    {
+        ApChange = Math.Abs(apChange); 
+    }
+
+    public int ApChange { get; set; }
 }
