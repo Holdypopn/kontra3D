@@ -20,48 +20,20 @@
 		"Rarity":"20",
 		"DrinkPoints":"2"
 	}],
-	"Equipment": [{
+	"Weapon": [{
 		"Name":"Knife",
 		"Description":"You can use this item to attack enemies.",
 		"StackCount":"1",
 		"Rarity":"5",
-		"SlotName" : "Hand"
-	},
-	{
-		"Name":"Chest",
-		"Description":"Chest ...",
-		"StackCount":"1",
-		"Rarity":"5",
-		"SlotName" : "Chest"
-	},
-	{
-		"Name":"Trouser",
-		"Description":"Trouser ...",
-		"StackCount":"1",
-		"Rarity":"5",
-		"SlotName" : "Trouser"
-	},
-	{
-		"Name":"Shoe",
-		"Description":"Shoe ...",
-		"StackCount":"1",
-		"Rarity":"5",
-		"SlotName" : "Foot"
-	},
-	{
-		"Name":"Helmet",
-		"Description":"You can use this item to attack enemies.",
-		"StackCount":"1",
-		"Rarity":"5",
-		"SlotName" : "Head"
-	},{
+		"WeaponPoints" : "15"
+	}],
+	"Miscellaneous": [{
 		"Name":"Flashlight",
-		"Description":"Help to see in the dark ...",
+		"Description":"Helps in the dark.",
 		"StackCount":"1",
-		"Rarity":"5",
-		"SlotName" : "Special"
-	}
-	],
+		"Rarity":"3",
+		"MiscPoints" : "15"
+	}],
 	"Health": [{
 		"Name":"Atibiotic",
 		"Description":"This item regenarates your health.",

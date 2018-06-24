@@ -26,11 +26,6 @@ public class Inventory : MonoBehaviour
     }
     #endregion
 
-    /// <summary>
-    /// Inventory transform
-    /// </summary>
-    public Transform Transform;
-
     //Contains a list of all available items
     public List<InventoryItem_Base> AvailableItems;
     
@@ -55,7 +50,7 @@ public class Inventory : MonoBehaviour
     private const int SLOTS = 16;
 
     //Contains all slots of the inventory
-    public IList<InventorySlot> Slots = new List<InventorySlot>();
+    private IList<InventorySlot> mSlots = new List<InventorySlot>();
 
     /// <summary>
     /// Called if Item is added to the inventory
@@ -87,7 +82,7 @@ public class Inventory : MonoBehaviour
     /// </summary>
     private void OnItemSelected()
     {
-        InventoryItem_Base item = Slots.Where(s => s.Id == currentSelectedSlot).First().FirstItem;
+        InventoryItem_Base item = mSlots.Where(s => s.Id == currentSelectedSlot).First().FirstItem;
 
         if (ItemSelected != null)
             ItemSelected(this, new InventoryEventsArgs(item));
@@ -96,23 +91,23 @@ public class Inventory : MonoBehaviour
     public void ChangeItems(int id1, int id2)
     {
         //Change Item stacks
-        var slot1ItemStack = Slots[id1].ItemStack;
-        Slots[id1].ItemStack = Slots[id2].ItemStack;
-        Slots[id2].ItemStack = slot1ItemStack;
+        var slot1ItemStack = mSlots[id1].ItemStack;
+        mSlots[id1].ItemStack = mSlots[id2].ItemStack;
+        mSlots[id2].ItemStack = slot1ItemStack;
 
         //Change item slots
-        foreach (var item in Slots[id1].ItemStack)
+        foreach (var item in mSlots[id1].ItemStack)
         {
-            item.Slot = Slots[id1];
+            item.Slot = mSlots[id1];
         }
 
-        foreach (var item in Slots[id2].ItemStack)
+        foreach (var item in mSlots[id2].ItemStack)
         {
-            item.Slot = Slots[id2];
+            item.Slot = mSlots[id2];
         }
 
         if (ItemSlotChanged != null)
-            ItemSlotChanged(this, new InventoryChangeEventsArgs(Slots));
+            ItemSlotChanged(this, new InventoryChangeEventsArgs(mSlots));
     }
 
     /// <summary>
@@ -147,10 +142,9 @@ public class Inventory : MonoBehaviour
         //Sums up all Items of the List
         AvailableItems.AddRange(temp.Drink);
         AvailableItems.AddRange(temp.Food);
-        AvailableItems.AddRange(temp.Equipment);
+        AvailableItems.AddRange(temp.Weapon);
+        AvailableItems.AddRange(temp.Miscellaneous);
         AvailableItems.AddRange(temp.Health);
-
-        Transform = transform;
     }
 
     /// <summary>
@@ -160,7 +154,7 @@ public class Inventory : MonoBehaviour
     {
         for (int i = 0; i < SLOTS; i++)
         {
-            Slots.Add(new InventorySlot(i));
+            mSlots.Add(new InventorySlot(i));
         }
     }
 
@@ -171,7 +165,7 @@ public class Inventory : MonoBehaviour
     /// <returns></returns>
     private InventorySlot FindStackableSlot(InventoryItem_Base item)
     {
-        foreach (InventorySlot slot in Slots)
+        foreach (InventorySlot slot in mSlots)
         {
             if (slot.IsStackable(item))
                 return slot;
@@ -185,7 +179,7 @@ public class Inventory : MonoBehaviour
     /// <returns></returns>
     private InventorySlot FindNextEmptySlot()
     {
-        foreach (InventorySlot slot in Slots)
+        foreach (InventorySlot slot in mSlots)
         {
             if (slot.IsEmpty)
                 return slot;
@@ -227,41 +221,13 @@ public class Inventory : MonoBehaviour
     }
 
     /// <summary>
-    /// Add item on positon
-    /// </summary>
-    /// <param name="name"></param>
-    public void AddItem(string name, int id)
-    {
-        InventoryItem_Base item = null;
-
-        item = GetItem(name);
-
-        if (item == null)
-        {
-            Debug.Log("The item " + name + "does not exist in available items.");
-        }
-
-        InventorySlot freeSlot = Slots[id];
-
-        if (freeSlot != null)
-        {
-            freeSlot.AddItem(item);
-
-            if (ItemAdded != null)
-            {
-                ItemAdded(this, new InventoryEventsArgs(item));
-            }
-        }
-    }
-
-    /// <summary>
     /// Remove a item from the inventory
     /// </summary>
     /// <param name="id"></param>
     /// <returns></returns>
-    public InventoryItem_Base RemoveItem(int id)
+    private InventoryItem_Base RemoveItem(int id)
     {
-        var slot = Slots.Where(s => s.Id == id).First();
+        var slot = mSlots.Where(s => s.Id == id).First();
         var item = slot.FirstItem;
         var ret = slot.Remove(item);
 

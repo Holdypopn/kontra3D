@@ -37,7 +37,8 @@ public class InventoryItems
 {
     public InventoryItem_Food[] Food;
     public InventoryItem_Drink[] Drink;
-    public InventoryItem_Equipment[] Equipment;
+    public InventoryItem_Weapon[] Weapon;
+    public InventoryItem_Miscellaneous[] Miscellaneous;
     public InventoryItem_Health[] Health;
 }
 
@@ -112,10 +113,17 @@ public class InventoryItem_Health : InventoryItem_Base
 }
 
 [Serializable]
-public class InventoryItem_Equipment : InventoryItem_Base
+public class InventoryItem_Miscellaneous : InventoryItem_Base
 {
-    [HoverMenue(DisplayName ="Equipment slot")]
-    public string SlotName;
+    [HoverMenue(DisplayName ="Misc points")]
+    public string MiscPoints;
+}
+
+[Serializable]
+public class InventoryItem_Weapon : InventoryItem_Base
+{
+    [HoverMenue]
+    public string WeaponPoints;
 }
 
 /// <summary>
