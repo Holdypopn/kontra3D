@@ -53,13 +53,17 @@
   <ItemGroup>
      <Compile Include="Assets\Scripts\General\Healthbar.cs" />
      <Compile Include="Assets\Scripts\General\MainMenu.cs" />
+     <Compile Include="Assets\Scripts\General\MenuBar.cs" />
      <Compile Include="Assets\Scripts\General\Score.cs" />
+     <Compile Include="Assets\Scripts\Inventory\Equipment.cs" />
+     <Compile Include="Assets\Scripts\Inventory\EquipmentPanel.cs" />
      <Compile Include="Assets\Scripts\Inventory\InformationPanel.cs" />
      <Compile Include="Assets\Scripts\Inventory\Inventory.cs" />
      <Compile Include="Assets\Scripts\Inventory\InventoryItem.cs" />
      <Compile Include="Assets\Scripts\Inventory\InventoryPanel.cs" />
      <Compile Include="Assets\Scripts\Inventory\InventorySlot.cs" />
      <Compile Include="Assets\Scripts\Inventory\ItemDragHandler.cs" />
+     <Compile Include="Assets\Scripts\Inventory\ItemStoreBase.cs" />
      <Compile Include="Assets\Scripts\Inventory\JsonInventoryReader.cs" />
      <Compile Include="Assets\Scripts\Inventory\SlotSelectHandler.cs" />
      <Compile Include="Assets\Scripts\Player\Player.cs" />
