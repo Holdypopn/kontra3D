@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -5,13 +6,13 @@ using UnityEngine.UI;
 
 public class ScavengeHandling : MonoBehaviour
 {
+    //TODO Kann man das vll generisch aus dem json erzeugen?
     enum FocusType
     {
         Food,
         Drink,
-        Misc,
+        Equipment,
         Health,
-        Weapon,
         None
     };
     
@@ -73,20 +74,62 @@ public class ScavengeHandling : MonoBehaviour
     /// <returns></returns>
     InventoryItem_Base getRandomItem(FocusType focus = FocusType.None)
     {
-        List<InventoryItem_Base> newList = new List<InventoryItem_Base>(Inventory.inventoryInstance.AvailableItems);
-        
-        if (focus != FocusType.None)
-            newList.Where(i => i.GetType().Name.Contains(focus.ToString())).ToList().ForEach(x => x.Rarity += 5);
+        FocusType foundItemType = FocusType.None;
+        List<Dictionary<FocusType, int>> dictList = new List<Dictionary<FocusType, int>>();
 
-        int totalRarity = newList.Sum(x => x.Rarity);
+        foreach (var item in Enum.GetValues(typeof(FocusType)))
+        {
+            dictList.Add(new Dictionary<FocusType, int> { { (FocusType)item, 10 } });
+        }
+
+        dictList.Remove(dictList.Single(x => x.Keys.First() == FocusType.None));
+
+        int totalItemTypeRarity = 0;
+        
+        foreach (var dict in dictList)
+        {
+            if (focus != FocusType.None)
+            {
+                if (dict.ContainsKey(focus))
+                {
+                    dict[focus] += 5;
+                }
+            }
+
+            totalItemTypeRarity += dict.Sum(x => x.Value);
+        }
+
         System.Random r = new System.Random();
-        var randomNumber = r.NextDouble() * totalRarity;
+        var randomNumber = r.NextDouble() * totalItemTypeRarity;
 
         double totalSoFar = 0;
+        foreach (var item in dictList)
+        {
+            totalSoFar += item.Sum(x => x.Value);
+            if (totalSoFar > randomNumber)
+            {
+                foundItemType = item.Keys.First();
+                break;
+            }
+        }
+        
+        List<InventoryItem_Base> newList = new List<InventoryItem_Base>(Inventory.inventoryInstance.AvailableItems);
+
+        Debug.Log("foundItemType: " + foundItemType.ToString());
+        newList = newList.Where(i => i.GetType().Name.Contains(foundItemType.ToString())).ToList();
+
+        Debug.Log("newList:");
+        newList.ForEach(x => Debug.Log(x.Name));
+
+        int totalItemRarity = newList.Sum(x => x.Rarity);
+        System.Random rand = new System.Random();
+        var randomItemNumber = rand.NextDouble() * totalItemRarity;
+
+        totalSoFar = 0;
         foreach (var item in newList)
         {
             totalSoFar += item.Rarity;
-            if (totalSoFar > randomNumber)
+            if (totalSoFar > randomItemNumber)
             {
                 Debug.Log("found item: " + item.Name);
                 return item;
