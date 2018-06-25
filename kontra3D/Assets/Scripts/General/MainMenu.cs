@@ -20,4 +20,9 @@ public class MainMenu : MonoBehaviour {
     {
         SceneManager.LoadScene("StartMenu");
     }
+
+    public void CloseMenuWindow(GameObject obj)
+    {
+        obj.SetActive(false);
+    }
 }
