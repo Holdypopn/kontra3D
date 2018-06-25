@@ -13,5 +13,7 @@ public class EquipmentPanel : InventoryPanelBase
         Equipment.Instance.ItemRemoved += Event_ItemChanged;
         Equipment.Instance.ItemSelected += Event_ItemSelected;
         Equipment.Instance.ItemSlotChanged += Event_ItemSlotChanged;
+
+        OverideText = false;
     }
 }

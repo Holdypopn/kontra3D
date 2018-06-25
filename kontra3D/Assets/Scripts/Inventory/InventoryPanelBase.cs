@@ -3,6 +3,7 @@ using UnityEngine.UI;
 
 public class InventoryPanelBase : MonoBehaviour {
 
+    public bool OverideText = true;
     //Contains the index of the last selected slot (For reset)
     public int lastSelectedId = 0;
     
@@ -77,11 +78,11 @@ public class InventoryPanelBase : MonoBehaviour {
         else if (itemCount == 1) //First or last item in slot
         {
 
-            txtCount.text = "";
+            if (OverideText) txtCount.text = "";
         }
         else
         {
-            txtCount.text = itemCount.ToString();
+            if (OverideText) txtCount.text = itemCount.ToString();
         }
     }
 
@@ -102,7 +103,7 @@ public class InventoryPanelBase : MonoBehaviour {
         image.enabled = false;
         image.sprite = null;
         HoverText.text = "";
-        txtCount.text = "";
+        if(OverideText) txtCount.text = "";
     }
     
     /// <summary>
