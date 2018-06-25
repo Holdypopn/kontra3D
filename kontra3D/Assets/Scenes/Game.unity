@@ -11725,6 +11725,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 74cad86934b4892499d7bf0d57ca0524, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  standardItemTypeProbability: 10
+  addedFocusProbability: 50
 --- !u!224 &1705039923 stripped
 RectTransform:
   m_PrefabParentObject: {fileID: 224768070770494752, guid: de6e15fb1821d22479c8fe64864cfd29,
