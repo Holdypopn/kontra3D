@@ -113,6 +113,11 @@ public class ItemDragHandler : MonoBehaviour, IDragHandler, IEndDragHandler
 
         if (itemFromEquip != null && itemFromEquip.Name == "empty")//Slot was empty
         {
+            Debug.Log("Was machst du hier????");
+            Debug.Log("itemFromEquip" + itemFromEquip);
+            Debug.Log("itemFromEquip.Name" + itemFromEquip.Name);
+
+
             Inventory.inventoryInstance.RemoveItem(slotIdInv);
             return;
         }

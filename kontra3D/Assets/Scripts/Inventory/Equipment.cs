@@ -82,9 +82,10 @@ public class Equipment : MonoBehaviour {
         {
             return null;
         }
+        
+        var oldSlot = Slots[slot].FirstItem == null ? new InventoryItem_Base() { Name = "empty"} : Slots[slot].FirstItem.Clone() as InventoryItem_Base;
 
-        var oldSlot = Slots[slot] == null ? Slots[slot].FirstItem.Clone() as InventoryItem_Base : new InventoryItem_Base() { Name = "empty"};
-
+        Slots[slot].Remove(item);
         Slots[slot].AddItem(item);
 
         if (ItemAdded != null)

@@ -243,6 +243,8 @@ public class Inventory : MonoBehaviour
 
         InventorySlot freeSlot = Slots[id];
 
+        Debug.Log("Add item " + name + "on slot " + id);
+
         if (freeSlot != null)
         {
             freeSlot.AddItem(item);
