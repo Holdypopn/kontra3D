@@ -76,7 +76,7 @@ public class Equipment : MonoBehaviour {
     }
 
     //Contains all slots of the inventory
-    private IList<InventorySlot> Slots = new List<InventorySlot>();
+    public IList<InventorySlot> Slots = new List<InventorySlot>();
 
     /// <summary>
     /// Called if Item is added to the inventory

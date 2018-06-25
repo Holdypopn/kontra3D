@@ -15,5 +15,7 @@ public class EquipmentPanel : InventoryPanelBase
         Equipment.Instance.ItemSlotChanged += Event_ItemSlotChanged;
 
         OverideText = false;
+
+        Event_ItemSlotChanged(null, new InventoryChangeEventsArgs(Equipment.Instance.Slots));
     }
 }

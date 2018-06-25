@@ -14,7 +14,7 @@ public class InventoryPanel : InventoryPanelBase
         Inventory.Instance.ItemSelected += Event_ItemSelected;
         Inventory.Instance.ItemSlotChanged += Event_ItemSlotChanged;
 
-
+        Event_ItemSlotChanged(null ,new InventoryChangeEventsArgs(Inventory.Instance.Slots));
 
         this.enabled = false;
     }
