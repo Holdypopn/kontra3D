@@ -13,7 +13,14 @@ public class SlotSelectHandler : MonoBehaviour
     /// <param name="borderOfSlot"></param>
     public void OnSlotClick()
     {
-        Inventory.inventoryInstance.CurrentSelectedSlot = Int32.Parse(transform.parent.name.Split('(')[1].Split(')')[0]); //Naming convention of slot is mandatory: f.e. Slot (1)
+        if (!transform.parent.parent.name.Contains("Equipment"))
+        {
+            Inventory.Instance.CurrentSelectedSlot = Int32.Parse(transform.parent.name.Split('(')[1].Split(')')[0]); //Naming convention of slot is mandatory: f.e. Slot (1)
+        }
+        else
+        {
+            Equipment.Instance.CurrentSelectedSlot = Int32.Parse(transform.parent.name.Split('(')[1].Split(')')[0]); //Naming convention of slot is mandatory: f.e. Slot (1)
+        }
 
         EventSystem.current.GetComponent<EventSystem>().SetSelectedGameObject(null);
     }

@@ -6,24 +6,74 @@ using UnityEngine;
 public class Equipment : MonoBehaviour {
 
     #region Singleton
-    public static Equipment equipmentInstance;
+    public static Equipment Instance;
 
     void Awake()
     {
-        if (equipmentInstance != null)
+        if (Instance != null)
         {
             Debug.LogWarning("More than one instance of Equipment found!");
             return;
         }
 
-        equipmentInstance = this;
+        Instance = this;
     }
     #endregion
 
     public Transform Transform;
 
+    /// <summary>
+    /// Offers all Benefits of the inventory item
+    /// </summary>
+    public EquipmentBenefits EquipmentBenefits
+    {
+        get
+        {
+            EquipmentBenefits equipmentBenefits = new EquipmentBenefits();
+
+            foreach(var slot in Slots)
+            {
+                if (slot.FirstItem != null)
+                {
+                    equipmentBenefits = equipmentBenefits + (slot.FirstItem as InventoryItem_Equipment).EquipmentBenefits;
+                }
+            }
+
+            return equipmentBenefits;
+        }
+
+    }
+
     //Slot count of the equipment
     private const int SLOTS = 9;
+
+    private int currentSelectedSlot = -1;
+    /// <summary>
+    /// Current selected slot
+    /// </summary>
+    public int CurrentSelectedSlot
+    {
+        get
+        {
+            return currentSelectedSlot;
+        }
+        set
+        {
+            currentSelectedSlot = value;
+            OnItemSelected();
+        }
+    }
+    
+    /// <summary>
+    /// Event is called when a Item is selected in the Inventory
+    /// </summary>
+    private void OnItemSelected()
+    {
+        InventoryItem_Base item = Slots.Where(s => s.Id == currentSelectedSlot).First().FirstItem;
+
+        if (ItemSelected != null)
+            ItemSelected(this, new InventoryEventsArgs(item));
+    }
 
     //Contains all slots of the inventory
     private IList<InventorySlot> Slots = new List<InventorySlot>();
@@ -32,6 +82,11 @@ public class Equipment : MonoBehaviour {
     /// Called if Item is added to the inventory
     /// </summary>
     public event EventHandler<InventoryEventsArgs> ItemAdded;
+
+    /// <summary>
+    /// Event executed when item is selected
+    /// </summary>
+    public event EventHandler<InventoryEventsArgs> ItemSelected;
     
     /// <summary>
     /// Called if item is removed from the inventory

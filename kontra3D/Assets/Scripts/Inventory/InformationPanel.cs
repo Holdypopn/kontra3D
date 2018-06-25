@@ -13,8 +13,8 @@ public class InformationPanel : MonoBehaviour
     /// </summary>
     void Start()
     {
-        Inventory.inventoryInstance.ItemSelected += InventoryScript_ItemSelected;
-        Inventory.inventoryInstance.ItemRemoved += InventoryScript_ItemRemoved;
+        Inventory.Instance.ItemSelected += InventoryScript_ItemSelected;
+        Inventory.Instance.ItemRemoved += InventoryScript_ItemRemoved;
     }
 
     /// <summary>
@@ -24,7 +24,7 @@ public class InformationPanel : MonoBehaviour
     /// <param name="e"></param>
     private void InventoryScript_ItemRemoved(object sender, InventoryEventsArgs e)
     {
-        if (Inventory.inventoryInstance.CurrentSelectedSlot == e.Item.Slot.Id && e.Item.Slot.Count == 0)
+        if (Inventory.Instance.CurrentSelectedSlot == e.Item.Slot.Id && e.Item.Slot.Count == 0)
         {
             var image = transform.GetChild(1).GetComponent<Image>();
             var description = transform.GetChild(2).GetComponent<Text>();
@@ -61,7 +61,7 @@ public class InformationPanel : MonoBehaviour
     /// </summary>
     public void OnUseClick()
     {
-        Inventory.inventoryInstance.UseSelectedItem();
+        Inventory.Instance.UseSelectedItem();
     }
 
     /// <summary>
@@ -69,6 +69,6 @@ public class InformationPanel : MonoBehaviour
     /// </summary>
     public void OnRemoveClick()
     {
-        Inventory.inventoryInstance.RemoveSelectedItem();
+        Inventory.Instance.RemoveSelectedItem();
     }
 }

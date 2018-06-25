@@ -12,17 +12,17 @@ using UnityEngine;
 public class Inventory : MonoBehaviour
 {
     #region Singleton
-    public static Inventory inventoryInstance;
+    public static Inventory Instance;
 
     void Awake()
     {
-        if (inventoryInstance != null)
+        if (Instance != null)
         {
             Debug.LogWarning("More than one instance of Inventory found!");
             return;
         }
 
-        inventoryInstance = this;
+        Instance = this;
     }
     #endregion
 

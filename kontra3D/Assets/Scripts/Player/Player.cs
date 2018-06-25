@@ -47,7 +47,7 @@ public class Player : MonoBehaviour
 
     public void Start()
     {
-        Inventory.inventoryInstance.ItemUsed += InventoryInstance_ItemUsed;
+        Inventory.Instance.ItemUsed += InventoryInstance_ItemUsed;
     }
 
     /// <summary>

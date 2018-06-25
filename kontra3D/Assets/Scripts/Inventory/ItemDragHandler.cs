@@ -24,7 +24,7 @@ public class ItemDragHandler : MonoBehaviour, IDragHandler, IEndDragHandler
         string destination = "";
 
         //Change slots in Inventory
-        foreach(RectTransform slot in Inventory.inventoryInstance.Transform.Find("InventoryPanel")) //InventoryPanel
+        foreach(RectTransform slot in Inventory.Instance.Transform.Find("InventoryPanel")) //InventoryPanel
         {
             if (RectTransformUtility.RectangleContainsScreenPoint(slot, Input.mousePosition)) 
             {
@@ -33,7 +33,7 @@ public class ItemDragHandler : MonoBehaviour, IDragHandler, IEndDragHandler
             }
         }
 
-        foreach (RectTransform slot in Equipment.equipmentInstance.Transform)
+        foreach (RectTransform slot in Equipment.Instance.Transform)
         {
             if (RectTransformUtility.RectangleContainsScreenPoint(slot, Input.mousePosition))
             {
@@ -74,9 +74,9 @@ public class ItemDragHandler : MonoBehaviour, IDragHandler, IEndDragHandler
         var slotId1 = Int32.Parse(t1.name.Split('(')[1].Split(')')[0]); //Naming convention of slot is mandatory: f.e. Slot (1)
         var slotId2 = Int32.Parse(t2.name.Split('(')[1].Split(')')[0]); //Naming convention of slot is mandatory: f.e. Slot (1)
 
-        Inventory.inventoryInstance.ChangeItems(slotId1, slotId2);
+        Inventory.Instance.ChangeItems(slotId1, slotId2);
 
-        Inventory.inventoryInstance.CurrentSelectedSlot = slotId2;
+        Inventory.Instance.CurrentSelectedSlot = slotId2;
     }
 
     private void ChangeSlotsInEquipment(Transform t1, Transform t2)
@@ -84,7 +84,7 @@ public class ItemDragHandler : MonoBehaviour, IDragHandler, IEndDragHandler
         var slotId1 = Int32.Parse(t1.name.Split('(')[1].Split(')')[0]); //Naming convention of slot is mandatory: f.e. Slot (1)
         var slotId2 = Int32.Parse(t2.name.Split('(')[1].Split(')')[0]); //Naming convention of slot is mandatory: f.e. Slot (1)
 
-        if(!(Equipment.equipmentInstance.ChangeItems(slotId1, slotId2)))
+        if(!(Equipment.Instance.ChangeItems(slotId1, slotId2)))
             Debug.Log("Items could not be changed!");
     }
 
@@ -95,20 +95,20 @@ public class ItemDragHandler : MonoBehaviour, IDragHandler, IEndDragHandler
 
         InventoryItem_Base itemFromEquip = null;
 
-        if (Inventory.inventoryInstance.Slots[slotIdInv].FirstItem != null)
-            itemFromEquip = Equipment.equipmentInstance.ReplaceItem(Inventory.inventoryInstance.Slots[slotIdInv].FirstItem.Clone() as InventoryItem_Base, slotIdEquip);
+        if (Inventory.Instance.Slots[slotIdInv].FirstItem != null)
+            itemFromEquip = Equipment.Instance.ReplaceItem(Inventory.Instance.Slots[slotIdInv].FirstItem.Clone() as InventoryItem_Base, slotIdEquip);
         else
-            itemFromEquip = Equipment.equipmentInstance.RemoveItem(slotIdEquip);
+            itemFromEquip = Equipment.Instance.RemoveItem(slotIdEquip);
 
         if (itemFromEquip != null && itemFromEquip.Name == "empty")//Slot was empty
         {
-            Inventory.inventoryInstance.RemoveItem(slotIdInv);
+            Inventory.Instance.RemoveItem(slotIdInv);
             return;
         }
         else if (itemFromEquip != null)
         {
-            Inventory.inventoryInstance.RemoveItem(slotIdInv);
-            Inventory.inventoryInstance.AddItem(itemFromEquip.Name, slotIdInv);
+            Inventory.Instance.RemoveItem(slotIdInv);
+            Inventory.Instance.AddItem(itemFromEquip.Name, slotIdInv);
         }
         else
             Debug.Log("The slot did not accept this item");

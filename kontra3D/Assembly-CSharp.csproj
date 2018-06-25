@@ -61,6 +61,7 @@
      <Compile Include="Assets\Scripts\Inventory\Inventory.cs" />
      <Compile Include="Assets\Scripts\Inventory\InventoryItem.cs" />
      <Compile Include="Assets\Scripts\Inventory\InventoryPanel.cs" />
+     <Compile Include="Assets\Scripts\Inventory\InventoryPanelBase.cs" />
      <Compile Include="Assets\Scripts\Inventory\InventorySlot.cs" />
      <Compile Include="Assets\Scripts\Inventory\ItemDragHandler.cs" />
      <Compile Include="Assets\Scripts\Inventory\ItemStoreBase.cs" />
