@@ -6,6 +6,7 @@ using UnityEngine;
 public class PlayerStats
 {
     public static int DefaultPlayerStat = 10;
+    public static int MaxHealth = 100;
 
     /// <summary>
     /// Triggers when Player dies
@@ -34,7 +35,7 @@ public class PlayerStats
         Thirst = thirst;
     }
 
-    public int Health = DefaultPlayerStat;
+    public int Health = MaxHealth;
     public int Hunger = DefaultPlayerStat;
     public int Thirst = DefaultPlayerStat;
     public int ActionPoints = DefaultPlayerStat;
@@ -59,9 +60,9 @@ public class PlayerStats
             Hunger = 0;
             if(removeHealth) Health -= 1;
         }
-        else if (Hunger > 10)
+        else if (Hunger > DefaultPlayerStat)
         {
-            Hunger = 10;
+            Hunger = DefaultPlayerStat;
         }
 
         if (Thirst <= 0)
@@ -69,27 +70,27 @@ public class PlayerStats
             Thirst = 0;
             if (removeHealth) Health -= 1;
         }
-        else if (Thirst > 10)
+        else if (Thirst > DefaultPlayerStat)
         {
-            Thirst = 10;
+            Thirst = DefaultPlayerStat;
         }
 
         if (ActionPoints <= 0)
         {
             ActionPoints = 0;
         }
-        else if (ActionPoints > 10)
+        else if (ActionPoints > DefaultPlayerStat)
         {
-            ActionPoints = 10;
+            ActionPoints = DefaultPlayerStat;
         }
 
         if (Health <= 0)
         {
             OnPlayerDie();
         }
-        else if (Health > 10)
+        else if (Health > MaxHealth)
         {
-            Health = 10;
+            Health = MaxHealth;
         }
     }
 

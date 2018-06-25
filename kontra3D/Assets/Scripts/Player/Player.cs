@@ -92,8 +92,7 @@ public class Player : MonoBehaviour
     {
         if(Playerstats.Hunger ==0 || Playerstats.Thirst == 0)
         {
-            Debug.Log("Could not sleep regarding no food!"); //TODO possible deadlog-> Gameover??
-            return;
+            Playerstats.UpdatePlayerStats(new PlayerStats(-2, 0, 0, 2));
         }
         Playerstats.UpdatePlayerStats(new PlayerStats(0, -1, -1, 2));
         OnPlayerStatsChanged();
