@@ -100,7 +100,6 @@ public class Equipment : MonoBehaviour {
         
     void Start()
     {
-        Transform = transform;
     }
 
     /// <summary>

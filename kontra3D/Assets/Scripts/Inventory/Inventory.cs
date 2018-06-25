@@ -149,8 +149,6 @@ public class Inventory : MonoBehaviour
         AvailableItems.AddRange(temp.Food);
         AvailableItems.AddRange(temp.Equipment);
         AvailableItems.AddRange(temp.Health);
-
-        Transform = transform;
     }
 
     /// <summary>

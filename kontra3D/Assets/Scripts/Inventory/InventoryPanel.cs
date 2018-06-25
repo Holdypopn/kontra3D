@@ -13,5 +13,9 @@ public class InventoryPanel : InventoryPanelBase
         Inventory.Instance.ItemRemoved += Event_ItemChanged;
         Inventory.Instance.ItemSelected += Event_ItemSelected;
         Inventory.Instance.ItemSlotChanged += Event_ItemSlotChanged;
+
+
+
+        this.enabled = false;
     }
 }
