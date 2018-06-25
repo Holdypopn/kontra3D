@@ -61,7 +61,6 @@ public class Equipment : MonoBehaviour {
 
     private bool CheckIfSlotAcceptsItem(InventoryItem_Equipment item, int slot)
     {
-        Debug.Log(item.SlotName.Contains(((EquipmentSlots)slot).ToString()));
         return item.SlotName.Contains(((EquipmentSlots)slot).ToString());
     }
 

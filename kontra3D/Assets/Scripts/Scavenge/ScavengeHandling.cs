@@ -117,8 +117,7 @@ public class ScavengeHandling : MonoBehaviour
 
         Debug.Log("foundItemType: " + foundItemType.ToString());
         newList = newList.Where(i => i.GetType().Name.Contains(foundItemType.ToString())).ToList();
-
-        Debug.Log("newList:");
+        
         newList.ForEach(x => Debug.Log(x.Name));
 
         int totalItemRarity = newList.Sum(x => x.Rarity);

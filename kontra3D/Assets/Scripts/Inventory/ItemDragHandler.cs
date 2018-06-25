@@ -49,13 +49,10 @@ public class ItemDragHandler : MonoBehaviour, IDragHandler, IEndDragHandler
         {
             if (destination == "Equipment") //Destination is Equipment
             {
-                Debug.Log("1");
                 ChangeSlotsInEquipment(transform.parent.parent, destinationSlot);
             }
             else //Destination is Inventory
             {
-                Debug.Log("2");
-
                 MoveFromInventoryToEquipment(destinationSlot, transform.parent.parent);
             }
         }
@@ -63,14 +60,10 @@ public class ItemDragHandler : MonoBehaviour, IDragHandler, IEndDragHandler
         {
             if (destination == "Inventory") //Destination is Inventory
             {
-                Debug.Log("3");
-
                 ChangeSlotsInInventory(transform.parent.parent, destinationSlot);
             }
             else //Destination is Equipment
             {
-                Debug.Log("4");
-
                 MoveFromInventoryToEquipment(transform.parent.parent, destinationSlot);
             }
         }
@@ -78,7 +71,6 @@ public class ItemDragHandler : MonoBehaviour, IDragHandler, IEndDragHandler
 
     private void ChangeSlotsInInventory(Transform t1, Transform t2)
     {
-        Debug.Log("ChangeSlotsInInventory");
         var slotId1 = Int32.Parse(t1.name.Split('(')[1].Split(')')[0]); //Naming convention of slot is mandatory: f.e. Slot (1)
         var slotId2 = Int32.Parse(t2.name.Split('(')[1].Split(')')[0]); //Naming convention of slot is mandatory: f.e. Slot (1)
 
@@ -89,7 +81,6 @@ public class ItemDragHandler : MonoBehaviour, IDragHandler, IEndDragHandler
 
     private void ChangeSlotsInEquipment(Transform t1, Transform t2)
     {
-        Debug.Log("ChangeSlotsInInventory");
         var slotId1 = Int32.Parse(t1.name.Split('(')[1].Split(')')[0]); //Naming convention of slot is mandatory: f.e. Slot (1)
         var slotId2 = Int32.Parse(t2.name.Split('(')[1].Split(')')[0]); //Naming convention of slot is mandatory: f.e. Slot (1)
 
@@ -99,8 +90,6 @@ public class ItemDragHandler : MonoBehaviour, IDragHandler, IEndDragHandler
 
     private void MoveFromInventoryToEquipment(Transform inv, Transform equip)
     {
-        Debug.Log("MoveFromInventoryToEquipment");
-
         var slotIdInv = Int32.Parse(inv.name.Split('(')[1].Split(')')[0]); //Naming convention of slot is mandatory: f.e. Slot (1)
         var slotIdEquip = Int32.Parse(equip.name.Split('(')[1].Split(')')[0]); //Naming convention of slot is mandatory: f.e. Slot (1)
 
@@ -113,17 +102,11 @@ public class ItemDragHandler : MonoBehaviour, IDragHandler, IEndDragHandler
 
         if (itemFromEquip != null && itemFromEquip.Name == "empty")//Slot was empty
         {
-            Debug.Log("Was machst du hier????");
-            Debug.Log("itemFromEquip" + itemFromEquip);
-            Debug.Log("itemFromEquip.Name" + itemFromEquip.Name);
-
-
             Inventory.inventoryInstance.RemoveItem(slotIdInv);
             return;
         }
         else if (itemFromEquip != null)
         {
-            Debug.Log("Override " + itemFromEquip.Name);
             Inventory.inventoryInstance.RemoveItem(slotIdInv);
             Inventory.inventoryInstance.AddItem(itemFromEquip.Name, slotIdInv);
         }
