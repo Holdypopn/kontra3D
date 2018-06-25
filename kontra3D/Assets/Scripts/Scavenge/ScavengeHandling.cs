@@ -16,53 +16,79 @@ public class ScavengeHandling : MonoBehaviour
         None
     };
     
+	private Toggle foodToggle;
     private Toggle drinkToggle;
-    private Toggle foodToggle;
+    private Toggle equipToggle;
     private Toggle healthToggle;
     private Toggle noneToggle;
+	
+	private int standardItemTypeProbability = 10;
 
     // Use this for initialization
     void Start()
     {
-        var toggles = transform.GetComponentsInChildren<Toggle>();
+        setToggles();
+    }
+	
+	/// <summary>
+    /// Sets all found UI Toggles to all related programmed Toggles for further usage.
+    /// </summary>
+	private void setToggles()
+	{
+		var toggles = transform.GetComponentsInChildren<Toggle>();
 
         foreach (var item in toggles)
         {
+			if (item.name == "FoodToggle")
+            {
+                foodToggle = item;
+            }
+			
             if (item.name == "DrinkToggle")
             {
                 drinkToggle = item;
             }
 
-            if (item.name == "FoodToggle")
+            if (item.name == "EquipToggle")
             {
-                foodToggle = item;
+                equipToggle = item;
             }
 
             if (item.name == "HealthToggle")
             {
                 healthToggle = item;
             }
+			
+			if (item.name == "NoneToggle")
+            {
+                noneToggle = item;
+            }
         }
-    }
-
+	}
+	
+	/// <summary>
+    /// Checks which Focus was set in the UI and adds the found random item to the inventory.
+    /// </summary>
     public void Scavenge()
     {
-        FocusType f = FocusType.None;
-
+        FocusType searchFocus = FocusType.None;
+		
         if (drinkToggle.isOn)
-            f = FocusType.Drink;
+            searchFocus = FocusType.Drink;
         else if (foodToggle.isOn)
-            f = FocusType.Food;
+            searchFocus = FocusType.Food;
         else if (healthToggle.isOn)
-            f = FocusType.Health;
+            searchFocus = FocusType.Health;
+		else if (equipToggle.isOn)
+            searchFocus = FocusType.Equipment;
         
-        if (!Player.playerInstance.Scavange(f == FocusType.None ? 1 : 2))
+        if (!Player.playerInstance.Scavange(searchFocus == FocusType.None ? 1 : 2))
         {
             Debug.Log("No AP for Scavange available");
             return;
         }
 
-        InventoryItem_Base foundItem = getRandomItem(f);
+        InventoryItem_Base foundItem = getRandomItem(searchFocus);
 
         Inventory.inventoryInstance.AddItem(foundItem.Name);
     }
@@ -77,15 +103,17 @@ public class ScavengeHandling : MonoBehaviour
         FocusType foundItemType = FocusType.None;
         List<Dictionary<FocusType, int>> dictList = new List<Dictionary<FocusType, int>>();
 
-        foreach (var item in Enum.GetValues(typeof(FocusType)))
+		// Fill list with dictionaries of FocusType and standardItemTypeProbability
+        foreach (FocusType item in Enum.GetValues(typeof(FocusType)))
         {
-            dictList.Add(new Dictionary<FocusType, int> { { (FocusType)item, 10 } });
+            dictList.Add(new Dictionary<FocusType, int> { { item, standardItemTypeProbability } });
         }
 
         dictList.Remove(dictList.Single(x => x.Keys.First() == FocusType.None));
 
-        int totalItemTypeRarity = 0;
+        int totalItemTypeProbability = 0;
         
+		// Add additional focus probability and calculate totalItemTypeProbability
         foreach (var dict in dictList)
         {
             if (focus != FocusType.None)
@@ -96,13 +124,14 @@ public class ScavengeHandling : MonoBehaviour
                 }
             }
 
-            totalItemTypeRarity += dict.Sum(x => x.Value);
+            totalItemTypeProbability += dict.Sum(x => x.Value);
         }
 
         System.Random r = new System.Random();
-        var randomNumber = r.NextDouble() * totalItemTypeRarity;
-
+        var randomNumber = r.NextDouble() * totalItemTypeProbability;
         double totalSoFar = 0;
+		
+		// Calculate foundItemType based on related probabilities
         foreach (var item in dictList)
         {
             totalSoFar += item.Sum(x => x.Value);
@@ -112,19 +141,22 @@ public class ScavengeHandling : MonoBehaviour
                 break;
             }
         }
+		Debug.Log("foundItemType: " + foundItemType.ToString());
         
         List<InventoryItem_Base> newList = new List<InventoryItem_Base>(Inventory.inventoryInstance.AvailableItems);
-
-        Debug.Log("foundItemType: " + foundItemType.ToString());
+		
+		// Filter list to only contain the specific item type based on the prior calculated foundItemType
         newList = newList.Where(i => i.GetType().Name.Contains(foundItemType.ToString())).ToList();
-        
+
+        Debug.Log("newList:");
         newList.ForEach(x => Debug.Log(x.Name));
 
         int totalItemRarity = newList.Sum(x => x.Rarity);
         System.Random rand = new System.Random();
         var randomItemNumber = rand.NextDouble() * totalItemRarity;
-
         totalSoFar = 0;
+		
+		// Calculate found item based on related Rarity
         foreach (var item in newList)
         {
             totalSoFar += item.Rarity;
