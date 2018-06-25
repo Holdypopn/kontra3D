@@ -22,8 +22,8 @@ public class ScavengeHandling : MonoBehaviour
 	private Toggle healthToggle;
 	private Toggle noneToggle;
 
-	private int standardItemTypeProbability = 10;
-	private int addedFocusProbability = 5;
+	public int standardItemTypeProbability = 10;
+	public int addedFocusProbability = 5;
 
 	// Use this for initialization
 	void Start()
