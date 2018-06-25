@@ -118,6 +118,32 @@ public class Equipment : MonoBehaviour {
         return item.SlotName.Contains(((EquipmentSlots)slot).ToString());
     }
 
+    public Transform GetMatchingSlot(InventoryItem_Base item)
+    {
+        int fittingSlot = -1;
+
+        for(int slot = 0; slot < SLOTS; slot++)
+        {
+            if(CheckIfSlotAcceptsItem(item as InventoryItem_Equipment, slot))
+            {
+                //Save first slot for item change
+                if(fittingSlot == -1)
+                {
+                    fittingSlot = slot;
+                }
+
+                //First slot which is empty
+                if(Slots[slot].FirstItem == null)
+                {
+                    fittingSlot = slot;
+                    break;
+                }
+            }
+        }
+
+        return Transform.GetChild(fittingSlot);
+    }
+
     /// <summary>
     /// Replaces a item
     /// </summary>

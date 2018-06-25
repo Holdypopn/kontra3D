@@ -28,9 +28,17 @@ public class InformationPanel : MonoBehaviour
         {
             var image = transform.GetChild(1).GetComponent<Image>();
             var description = transform.GetChild(2).GetComponent<Text>();
+            var buttonUse = transform.GetChild(3).GetComponent<Button>();
+            var buttonRemove = transform.GetChild(4).GetComponent<Button>();
+            var buttonEquip = transform.GetChild(5).GetComponent<Button>();
+
 
             description.text = "";
             image.sprite = null;
+
+            buttonUse.gameObject.SetActive(false);
+            buttonRemove.gameObject.SetActive(false);
+            buttonEquip.gameObject.SetActive(false);
         }
     }
 
@@ -43,16 +51,26 @@ public class InformationPanel : MonoBehaviour
     {
         var image = transform.GetChild(1).GetComponent<Image>();
         var description = transform.GetChild(2).GetComponent<Text>();
+        var buttonUse = transform.GetChild(3).GetComponent<Button>();
+        var buttonRemove = transform.GetChild(4).GetComponent<Button>();
+        var buttonEquip = transform.GetChild(5).GetComponent<Button>();
 
         if (e.Item != null)
         {
             description.text = e.Item.Description;
             image.sprite = Resources.Load<Sprite>(e.Item.Name + "Icon");
+            buttonUse.gameObject.SetActive(!(e.Item is InventoryItem_Equipment));
+            buttonEquip.gameObject.SetActive(e.Item is InventoryItem_Equipment);
+            buttonRemove.gameObject.SetActive(true);
         }
         else
         {
             description.text = "";
             image.sprite = null;
+            buttonUse.gameObject.SetActive(false);
+            buttonRemove.gameObject.SetActive(false);
+            buttonEquip.gameObject.SetActive(false);
+
         }
     }
 
@@ -70,5 +88,13 @@ public class InformationPanel : MonoBehaviour
     public void OnRemoveClick()
     {
         Inventory.Instance.RemoveSelectedItem();
+    }
+
+    /// <summary>
+    /// When the button equip is pressed
+    /// </summary>
+    public void OnEquipClick()
+    {
+        ItemDragHandler.MoveFromInventoryToEquipment(SlotSelectHandler.CurrentSelectedInventoryTransform, Equipment.Instance.GetMatchingSlot(Inventory.Instance.GetSelectedItem()));
     }
 }

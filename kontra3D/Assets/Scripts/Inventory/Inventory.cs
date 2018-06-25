@@ -137,6 +137,11 @@ public class Inventory : MonoBehaviour
             ItemUsed(this, new InventoryEventsArgs(item));
     }
 
+    public InventoryItem_Base GetSelectedItem()
+    {
+        return Slots[currentSelectedSlot].FirstItem;
+    }
+
     /// <summary>
     /// Read all available Items from the JSON file
     /// </summary>

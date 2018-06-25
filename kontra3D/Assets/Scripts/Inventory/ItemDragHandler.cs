@@ -69,7 +69,7 @@ public class ItemDragHandler : MonoBehaviour, IDragHandler, IEndDragHandler
         }
     }
 
-    private void ChangeSlotsInInventory(Transform t1, Transform t2)
+    private static void ChangeSlotsInInventory(Transform t1, Transform t2)
     {
         var slotId1 = Int32.Parse(t1.name.Split('(')[1].Split(')')[0]); //Naming convention of slot is mandatory: f.e. Slot (1)
         var slotId2 = Int32.Parse(t2.name.Split('(')[1].Split(')')[0]); //Naming convention of slot is mandatory: f.e. Slot (1)
@@ -79,7 +79,7 @@ public class ItemDragHandler : MonoBehaviour, IDragHandler, IEndDragHandler
         Inventory.Instance.CurrentSelectedSlot = slotId2;
     }
 
-    private void ChangeSlotsInEquipment(Transform t1, Transform t2)
+    private static void ChangeSlotsInEquipment(Transform t1, Transform t2)
     {
         var slotId1 = Int32.Parse(t1.name.Split('(')[1].Split(')')[0]); //Naming convention of slot is mandatory: f.e. Slot (1)
         var slotId2 = Int32.Parse(t2.name.Split('(')[1].Split(')')[0]); //Naming convention of slot is mandatory: f.e. Slot (1)
@@ -88,7 +88,7 @@ public class ItemDragHandler : MonoBehaviour, IDragHandler, IEndDragHandler
             Debug.Log("Items could not be changed!");
     }
 
-    private void MoveFromInventoryToEquipment(Transform inv, Transform equip)
+    public static void MoveFromInventoryToEquipment(Transform inv, Transform equip)
     {
         var slotIdInv = Int32.Parse(inv.name.Split('(')[1].Split(')')[0]); //Naming convention of slot is mandatory: f.e. Slot (1)
         var slotIdEquip = Int32.Parse(equip.name.Split('(')[1].Split(')')[0]); //Naming convention of slot is mandatory: f.e. Slot (1)

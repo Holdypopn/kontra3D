@@ -7,6 +7,7 @@ using UnityEngine.EventSystems;
 /// </summary>
 public class SlotSelectHandler : MonoBehaviour
 {
+    public static Transform CurrentSelectedInventoryTransform;
     /// <summary>
     /// Takes the click event from the border of the slot and updates the inventory
     /// </summary>
@@ -16,6 +17,7 @@ public class SlotSelectHandler : MonoBehaviour
         if (!transform.parent.parent.name.Contains("Equipment"))
         {
             Inventory.Instance.CurrentSelectedSlot = Int32.Parse(transform.parent.name.Split('(')[1].Split(')')[0]); //Naming convention of slot is mandatory: f.e. Slot (1)
+            CurrentSelectedInventoryTransform = transform.parent;
         }
         else
         {
