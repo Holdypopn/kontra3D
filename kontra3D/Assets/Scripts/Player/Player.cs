@@ -92,7 +92,7 @@ public class Player : MonoBehaviour
     {
         if(Playerstats.Hunger ==0 || Playerstats.Thirst == 0)
         {
-            Playerstats.UpdatePlayerStats(new PlayerStats(-2, 0, 0, 2));
+            Playerstats.UpdatePlayerStats(new PlayerStats(-2, -1, -1, 2));
         }
         Playerstats.UpdatePlayerStats(new PlayerStats(0, -1, -1, 2));
         OnPlayerStatsChanged();
