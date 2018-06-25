@@ -91,9 +91,12 @@ public class ScavengeHandling : MonoBehaviour
 			return;
 		}
 
-		InventoryItem_Base foundItem = getRandomItem(searchFocus);
+        for(int i = 0; i<Equipment.Instance.EquipmentBenefits.ScavengeneItemMultiplier +1; i++)
+        {
+            InventoryItem_Base foundItem = getRandomItem(searchFocus);
 
-		Inventory.Instance.AddItem(foundItem.Name);
+            Inventory.Instance.AddItem(foundItem.Name);
+        }
 	}
 
     /// <summary>

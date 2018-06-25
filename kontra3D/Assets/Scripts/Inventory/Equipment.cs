@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class Equipment : MonoBehaviour {
+public class Equipment : MonoBehaviour
+{
 
     #region Singleton
     public static Equipment Instance;
@@ -31,7 +32,7 @@ public class Equipment : MonoBehaviour {
         {
             EquipmentBenefits equipmentBenefits = new EquipmentBenefits();
 
-            foreach(var slot in Slots)
+            foreach (var slot in Slots)
             {
                 if (slot.FirstItem != null)
                 {
@@ -63,7 +64,7 @@ public class Equipment : MonoBehaviour {
             OnItemSelected();
         }
     }
-    
+
     /// <summary>
     /// Event is called when a Item is selected in the Inventory
     /// </summary>
@@ -87,7 +88,7 @@ public class Equipment : MonoBehaviour {
     /// Event executed when item is selected
     /// </summary>
     public event EventHandler<InventoryEventsArgs> ItemSelected;
-    
+
     /// <summary>
     /// Called if item is removed from the inventory
     /// </summary>
@@ -97,7 +98,7 @@ public class Equipment : MonoBehaviour {
     /// Called if item slots are changed
     /// </summary>
     public event EventHandler<InventoryChangeEventsArgs> ItemSlotChanged;
-        
+
     void Start()
     {
     }
@@ -122,18 +123,18 @@ public class Equipment : MonoBehaviour {
     {
         int fittingSlot = -1;
 
-        for(int slot = 0; slot < SLOTS; slot++)
+        for (int slot = 0; slot < SLOTS; slot++)
         {
-            if(CheckIfSlotAcceptsItem(item as InventoryItem_Equipment, slot))
+            if (CheckIfSlotAcceptsItem(item as InventoryItem_Equipment, slot))
             {
                 //Save first slot for item change
-                if(fittingSlot == -1)
+                if (fittingSlot == -1)
                 {
                     fittingSlot = slot;
                 }
 
                 //First slot which is empty
-                if(Slots[slot].FirstItem == null)
+                if (Slots[slot].FirstItem == null)
                 {
                     fittingSlot = slot;
                     break;
@@ -150,19 +151,22 @@ public class Equipment : MonoBehaviour {
     /// <param name="name"></param>
     public InventoryItem_Base ReplaceItem(InventoryItem_Base item, int slot)
     {
-        if(!(item is InventoryItem_Equipment))
+        if (!(item is InventoryItem_Equipment))
         {
             return null;
         }
 
         InventoryItem_Equipment itemAsEquip = item as InventoryItem_Equipment;
 
-        if(!CheckIfSlotAcceptsItem(itemAsEquip, slot))
+        if (!CheckIfSlotAcceptsItem(itemAsEquip, slot))
         {
             return null;
         }
-        
-        var oldSlot = Slots[slot].FirstItem == null ? new InventoryItem_Base() { Name = "empty"} : Slots[slot].FirstItem.Clone() as InventoryItem_Base;
+
+        if (CheckIfItemAlreadyInEquip(itemAsEquip))
+            return null;
+
+        var oldSlot = Slots[slot].FirstItem == null ? new InventoryItem_Base() { Name = "empty" } : Slots[slot].FirstItem.Clone() as InventoryItem_Base;
 
         Slots[slot].Remove(item);
         Slots[slot].AddItem(item);
@@ -173,6 +177,22 @@ public class Equipment : MonoBehaviour {
         }
 
         return oldSlot;
+    }
+
+    private bool CheckIfItemAlreadyInEquip(InventoryItem_Equipment itemAsEquip)
+    {
+        foreach (var slot in Slots)
+        {
+            if (slot.FirstItem != null && itemAsEquip != null)
+            {
+                if (slot.FirstItem.Name == itemAsEquip.Name)
+                {
+                    return true;
+                }
+            }
+        }
+
+        return false;
     }
 
     /// <summary>
