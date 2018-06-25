@@ -67,6 +67,7 @@
      <Compile Include="Assets\Scripts\Inventory\ItemStoreBase.cs" />
      <Compile Include="Assets\Scripts\Inventory\JsonInventoryReader.cs" />
      <Compile Include="Assets\Scripts\Inventory\SlotSelectHandler.cs" />
+     <Compile Include="Assets\Scripts\Inventory\TooltipHandler.cs" />
      <Compile Include="Assets\Scripts\Player\Player.cs" />
      <Compile Include="Assets\Scripts\Player\PlayerStats.cs" />
      <Compile Include="Assets\Scripts\Player\PlayerStatsUI.cs" />
