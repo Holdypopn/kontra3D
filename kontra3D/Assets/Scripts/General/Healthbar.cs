@@ -9,6 +9,8 @@ public class Healthbar : MonoBehaviour
 
     public Text TxtHealth;
 
+    public int Max;
+
     void Start()
     {
 
@@ -22,7 +24,7 @@ public class Healthbar : MonoBehaviour
 
         if(PlayerStats.DefaultPlayerStat != 0)
         {
-            currentPercentage = (float)health / (float)(PlayerStats.DefaultPlayerStat);
+            currentPercentage = (float)health / (float)(Max);
         }
 
         ImgHealthBar.fillAmount = currentPercentage;
