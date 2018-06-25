@@ -72,6 +72,8 @@ public class ScavengeHandling : MonoBehaviour
 	/// </summary>
 	public void Scavenge()
 	{
+        var benefits = Equipment.Instance.EquipmentBenefits;
+
 		FocusType searchFocus = FocusType.None;
 
 		if (drinkToggle.isOn)
@@ -91,7 +93,7 @@ public class ScavengeHandling : MonoBehaviour
 
 		InventoryItem_Base foundItem = getRandomItem(searchFocus);
 
-		Inventory.inventoryInstance.AddItem(foundItem.Name);
+		Inventory.Instance.AddItem(foundItem.Name);
 	}
 
     /// <summary>
@@ -144,7 +146,7 @@ public class ScavengeHandling : MonoBehaviour
         }
 	Debug.Log("foundItemType: " + foundItemType.ToString());
         
-        List<InventoryItem_Base> newList = new List<InventoryItem_Base>(Inventory.inventoryInstance.AvailableItems);
+        List<InventoryItem_Base> newList = new List<InventoryItem_Base>(Inventory.Instance.AvailableItems);
 		
 	// Filter list to only contain the specific item type based on the prior calculated foundItemType
         newList = newList.Where(i => i.GetType().Name.Contains(foundItemType.ToString())).ToList();
