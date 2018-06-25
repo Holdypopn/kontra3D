@@ -47,8 +47,6 @@ public class ScavengeHandling : MonoBehaviour
 
     public void Scavenge()
     {
-        EquipmentBenefits benefits = Equipment.Instance.EquipmentBenefits;
-
         FocusType f = FocusType.None;
 
         if (drinkToggle.isOn)
@@ -66,7 +64,7 @@ public class ScavengeHandling : MonoBehaviour
 
         InventoryItem_Base foundItem = getRandomItem(f);
 
-        Inventory.Instance.AddItem(foundItem.Name);
+        Inventory.inventoryInstance.AddItem(foundItem.Name);
     }
 
     /// <summary>
@@ -115,11 +113,12 @@ public class ScavengeHandling : MonoBehaviour
             }
         }
         
-        List<InventoryItem_Base> newList = new List<InventoryItem_Base>(Inventory.Instance.AvailableItems);
-        
+        List<InventoryItem_Base> newList = new List<InventoryItem_Base>(Inventory.inventoryInstance.AvailableItems);
+
+        Debug.Log("foundItemType: " + foundItemType.ToString());
         newList = newList.Where(i => i.GetType().Name.Contains(foundItemType.ToString())).ToList();
         
-        //newList.ForEach(x => Debug.Log(x.Name));
+        newList.ForEach(x => Debug.Log(x.Name));
 
         int totalItemRarity = newList.Sum(x => x.Rarity);
         System.Random rand = new System.Random();
@@ -131,7 +130,7 @@ public class ScavengeHandling : MonoBehaviour
             totalSoFar += item.Rarity;
             if (totalSoFar > randomItemNumber)
             {
-                //Debug.Log("found item: " + item.Name);
+                Debug.Log("found item: " + item.Name);
                 return item;
             }
         }
