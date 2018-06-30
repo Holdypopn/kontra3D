@@ -4,21 +4,21 @@
 		"Description":"Regenerates food points.",
 		"StackCount":"2",
 		"Rarity":"10",
-		"FoodPoints":"2"
+		"FoodPoints":"5"
 	},
 	{
 		"Name":"Strawberry",
 		"Description":"Regenerates food points.",
 		"StackCount":"5",
 		"Rarity":"20",
-		"FoodPoints":"1"
+		"FoodPoints":"2"
 	}],
 	"Drink": [{
 		"Name":"Applejuice",
 		"Description":"Regenerates drink points.",
 		"StackCount":"2",
 		"Rarity":"20",
-		"DrinkPoints":"2"
+		"DrinkPoints":"3"
 	}],
 	"Equipment": [{
 		"Name":"Knife",
